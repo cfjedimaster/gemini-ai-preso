@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Adding Generative AI to your Workflow with Google Gemini</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+		.twocol {
+			display: grid;
+			grid-template-columns: 66% 33%;
+		}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				<h1>Adding Generative AI to your Workflow</h1><h2>with Google Gemini</h2>
+				</section>
+
+				<section>
+				<div class="twocol">
+				<div>
+					<h2>Me</h2>
+					<ul style="width: 100% !important">
+					<li>Raymond Camden</li>
+					<li>Senior Developer Evangelist for Adobe</li>
+					<li>raymondcamden.com</li>
+					</ul>
+				</div>
+				<div>
+					<img src="img/ray_tiger.jpg" style="max-width:70%">
+				</div>
+				</div>
+				</section>
+
+				<section data-background="img/fire.png" data-background-opacity="0.3">
+					<h2>Assumptions and Warnings</h2>
+				</section>
+
+				<section>
+				<h2>What You Know, What I Know</h2>
+				<ul>
+				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
+				<li class="fragment">Node.js (barely!!)</li>
+				<li class="fragment">Noob on Stage (me, not you)</li>
+				</li>
+				<aside class="notes">
+				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
+				Also, I know enough to be dangerous! Woot!
+				</aside>
+				</section>
+
+				<section>
+				<h2>Google Gemini</h2>
+				<ul>
+				<li class="fragment">The artist formally known as Bard (Feb 2023)</li>
+				<li class="fragment">Relaunched as Gemini (Dec 2023)</li>
+				<li class="fragment">API access in October (PaLM - text only)</li>
+				<li class="fragment">Gemini API (also Dec 2023)</li>
+				</ul>
+				<aside class="notes">
+Source: https://en.wikipedia.org/wiki/Gemini_(chatbot)				
+After an "underwhelming" February 8 livestream in Paris showcasing Bard, Google's stock fell eight percent, equivalent to a $100 billion loss in market valu				
+				</aside>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: "c/t",
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+
+definitions - with a focus on Gemini, how it compares to Vertex
+
+walkthrough of getting started - generating a key at least
+
+AI Studio - demo it - 
+
+Node code to make a prompt - talk about input, talk about output
+simplify demo
+
