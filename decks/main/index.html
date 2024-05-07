@@ -68,12 +68,91 @@
 				<li class="fragment">Relaunched as Gemini (Dec 2023)</li>
 				<li class="fragment">API access in October (PaLM - text only)</li>
 				<li class="fragment">Gemini API (also Dec 2023)</li>
+				<li class="fragment">Also... Vertex</li>
 				</ul>
 				<aside class="notes">
 Source: https://en.wikipedia.org/wiki/Gemini_(chatbot)				
 After an "underwhelming" February 8 livestream in Paris showcasing Bard, Google's stock fell eight percent, equivalent to a $100 billion loss in market valu				
+
+I'm going to ignore Vertex until the end of the preso because it's just going to be confusing - trust me.
 				</aside>
 				</section>
+
+				<section>
+				<h2>Google Gemini - Getting Started</h2>
+				<ul>
+				<li class="fragment"><a href="https://ai.google.dev/" target="_new">ai.google.dev</a></li>
+				<li class="fragment"><a href="https://aistudio.google.com/" target="_new">aistudio.google.com</a></li>
+				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/" target="_new">Docs</a></li>
+				<li class="fragment"><a href="https://discuss.ai.google.dev/" target="_new">Support Forum</li>
+				</ul>
+				<aside class="notes">
+				Marketing pages, good overview, etc. Examples. 
+				</aside>
+				</section>
+
+				<section>
+				<h2>Models</h2>
+				<ul>
+				<li class="fragment">Gemini 1.0 Pro (Text only)</li>
+				<li class="fragment">Gemini 1.0 Pro Vision (Text+Images)</li>
+				<li class="fragment">Gemini 1.5 Pro (Text + Images, Preview)</li>
+				<li class="fragment">Changing... like often</li>
+				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_new">More at docs</a></li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Code</h2>
+				<ul>
+				<li class="fragment">REST API</li>
+				<li class="fragment">Python</li>
+				<li class="fragment">Node</li>
+				<li class="fragment">Go</li>
+				<li class="fragment">Web 🤔</li>
+				<li class="fragment">Dart</li>
+				<li class="fragment">Flutter</li>
+				<li class="fragment">Android</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Actually Using It</h2>
+				<ul>
+				<li class="fragment">Step 1: Get a Key</li>
+				<li class="fragment">Step 2: </li>
+				<li class="fragment">Step 3: Profit!</li>
+				</ul>
+				</section>
+
+				<section>
+				<img src="img/getkey.png">
+				</section>
+
+				<section>
+				<img src="img/getkey2.png">
+				</section>
+
+				<section>
+				<img src="img/getkey3.png">
+				</section>
+
+				<section>
+				<img src="img/getkey4.png">
+				</section>
+
+				<section>
+				<pre><code>
+curl \
+  -H 'Content-Type: application/json' \
+  -d '{"contents":[{"parts":[{"text":"Write a story about a magic backpack"}]}]}' \
+  -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY'
+				</code></pre>
+				<aside class="notes">
+				show demos/curl.sh
+				</aside>
+				</section>
+
 
 			</div>
 		</div>
