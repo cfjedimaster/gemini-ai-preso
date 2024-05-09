@@ -16,7 +16,7 @@
 		<style>
 		.twocol {
 			display: grid;
-			grid-template-columns: 66% 33%;
+			grid-template-columns: 80% 20%;
 		}
 		</style>
 
@@ -24,7 +24,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
+				<section data-background="img/matrix.jpg" data-background-opacity="0.3">
 				<h1>Adding Generative AI to your Workflow</h1><h2>with Google Gemini</h2>
 				</section>
 
@@ -35,13 +35,19 @@
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
 					<li>Senior Developer Evangelist for Adobe</li>
-					<li>raymondcamden.com</li>
+					<li>🕸️ raymondcamden.com</li>
+					<li>✉️ raymondcamden@gmail.com</li>
 					</ul>
 				</div>
 				<div>
 					<img src="img/ray_tiger.jpg" style="max-width:70%">
 				</div>
 				</div>
+				</section>
+
+				<section>
+					<img src="img/qr.png">
+					<a href="https://github.com/cfjedimaster/gemini-ai-preso" target="_new">github.com/cfjedimaster/gemini-ai-preso</a>
 				</section>
 
 				<section data-background="img/fire.png" data-background-opacity="0.3">
@@ -62,6 +68,21 @@
 				</section>
 
 				<section>
+				<h2>TLDR: Good News</h2>
+				<p class="fragment">
+				Getting a key, writing the code, it's simple!
+				</p>
+				</section>
+
+				<section>
+				<h2>TLDR: Bad News</h2>
+				<p class="fragment">
+				*Correctly* using Gen AI is way more complex and "prompt engineering" is no joke.
+				</p>
+				</section>
+
+
+				<section>
 				<h2>Google Gemini</h2>
 				<ul>
 				<li class="fragment">The artist formally known as Bard (Feb 2023)</li>
@@ -79,12 +100,12 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				</section>
 
 				<section>
-				<h2>Google Gemini - Getting Started</h2>
+				<h2>Getting Started</h2>
 				<ul>
 				<li class="fragment"><a href="https://ai.google.dev/" target="_new">ai.google.dev</a></li>
 				<li class="fragment"><a href="https://aistudio.google.com/" target="_new">aistudio.google.com</a></li>
 				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/" target="_new">Docs</a></li>
-				<li class="fragment"><a href="https://discuss.ai.google.dev/" target="_new">Support Forum</li>
+				<li class="fragment"><a href="https://discuss.ai.google.dev/" target="_new">Support Forum</a></li>
 				</ul>
 				<aside class="notes">
 				Marketing pages, good overview, etc. Examples. 
@@ -153,7 +174,109 @@ curl \
 				</aside>
 				</section>
 
+				<section>
+				<pre class="language-json"><code data-trim>
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "In the bustling metropolis of Willow Creek, amidst the throngs of students, there was an ordinary backpack that held an extraordinary secret. It belonged to a young girl named Anya, who had always yearned for something more than her mundane existence.\n\nOne gloomy afternoon, as Anya sifted through her grandmother's attic, her fingers brushed against a dusty leather satchel hidden away in a forgotten corner. Curiosity sparked within her, and she couldn't resist a peek inside.\n\nTo her astonishment, the backpack was not empty. Instead, it was filled with an assortment of peculiar objects—a magnifying glass with an iridescent glow, a quill that whispered wisdom, and a map that trembled with life.\n\nAnya's heart raced as she realized the backpack possessed ancient magic. With trembling hands, she touched the magnifying glass, and the world around her blurred into focus. She could see through walls, revealing hidden secrets and forgotten treasures.\n\nThe quill, when she held it, flowed effortlessly across the page, penning words of wisdom and inspiration that seemed to come from a higher source. And the map, once unfolded, whispered of faraway lands and uncharted adventures.\n\nWord of Anya's magical backpack spread through Willow Creek like wildfire. People whispered about her extraordinary abilities, and requests for her help came flooding in. Anya embraced her destiny, using her powers to locate lost objects, solve mysteries, and mend broken hearts.\n\nEach adventure brought new challenges and unexpected discoveries. She encountered talking animals, mischievous fairies, and wise old wizards. Through it all, the backpack remained her constant companion, its magic proving invaluable in countless situations.\n\nHowever, as Anya's fame grew, so too did the attention of those who sought to exploit her power. A ruthless collector, known as Dr. Eldritch, became obsessed with obtaining the backpack for his own nefarious purposes.\n\nAnya faced her greatest challenge when Dr. Eldritch kidnapped her and stole the backpack. Without its magic, she felt lost and vulnerable. But her friends and the spirit of the backpack itself guided her, reminding her that true power lay within her own heart.\n\nIn a daring rescue mission, Anya freed her backpack and together they defeated Dr. Eldritch, returning the magical satchel to its rightful owner. From that day forward, Anya and her magical backpack continued to use their powers for good, becoming legends in the annals of Willow Creek and beyond.\n\nAnd so, the ordinary backpack that once lay forgotten in an attic became a symbol of hope and wonder, its magic a constant reminder that even in the most ordinary of objects, there can be extraordinary possibilities."
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0,
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "probability": "NEGLIGIBLE"
+        }
+      ]
+    }
+  ]
+}
+				</code></pre>
+				<p>
+				<a href="https://ai.google.dev/api/rest/v1/GenerateContentResponse" target="_new">Reference for Response</a>
+				</p>
+				</section>
 
+				<section>
+				<h2>AI Studio</h2>
+				<ul>
+				<li class="fragment">Let's you create, and save, prompts</li>
+				<li class="fragment">Super, super important for testing and tweaking</li>
+				<li class="fragment">Then let's you generate code</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>AI Studio Demo</h2>
+					<aside class="notes">
+Open Studio.
+Show create new and discuss the differences.
+Start simple: Why is the sky blue, and how are cats involved in that process?
+Note Markdown, if it comes up.
+Show output in JSON
+Talk about how you tweak the prompt: You should answer at a level appropriate for a high schooler and even if cats aren't really involved, you should make up a way they are.
+
+Show Get Code - note how it has the whole prompt.
+
+Show first.js
+call out the important bits
+comment out .text(), show full json instead 
+
+show second.js
+					</aside>
+				</section>
+
+				<section>
+				<h2>Multimodal</h2>
+				<ul>
+				<li class="fragment">Just means multiple types of input</li>
+				<li class="fragment">Images, text files, and video<sup>*</sup></li>
+				<li class="fragment">*Can* be inlined as Base64, if less than 20 megs</li>
+				<li class="fragment">Files API (code samples in Python only)</li>
+				<li class="fragment">Files API max - 20 gigs per project, 2 per file</li>
+				<li class="fragment">Files API - auto delete after 2 days (you can manually delete as well)</li>
+				</ul>
+				<aside class="notes">
+				For video, you have to break it up into images frames. 
+				</aside>
+				</section>
+
+				<section>
+				<h2>File Type Specifics</h2>
+				<ul>
+				<li class="fragment">Image: PNG, JPG, WEBP, HEIC, HEIF</li>
+				<li class="fragment">Audio: WAV, MP3, AIFF, AAC, OGG, FLAC</li>
+				<li class="fragment">Video: Must be broken into images + audio track</li>
+				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>AI Studio Demo - MM</h2>
+					<aside class="notes">
+Open Studio. Pick cat.
+For code, show image1.js
+					</aside>
+				</section>
 			</div>
 		</div>
 
