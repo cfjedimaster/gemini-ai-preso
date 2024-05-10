@@ -277,6 +277,92 @@ Open Studio. Pick cat.
 For code, show image1.js
 					</aside>
 				</section>
+
+				<section>
+				<h2>Chat</h2>
+				<ul>
+				<li class="fragment">Why? Context</li>
+				<li class="fragment">First and Foremost: Nothing Special</li>
+				<li class="fragment">Chat is just prompts that... keep... growing</li>
+				<li class="fragment">You manage the history...</li>
+				<li class="fragment">Use the SDK! ✨</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+				</section>
+
+				<section>
+				<h2>System Instructions</h2>
+				<ul>
+				<li class="fragment">Provide context about how the model should respond</li>
+				<li class="fragment">Think persona, style, as well as output</li>
+				<li class="fragment">Can be used in the prompt as well</li>
+				<li class="fragment">As of May 2024 -> Beta</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="language-javascript">
+// From the docs: https://ai.google.dev/gemini-api/docs/system-instructions
+const generativeModel = genAI.getGenerativeModel({
+  model: "gemini-1.5-pro-latest",
+  systemInstruction: "You are a cat. Your name is Neko."
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+				</section>
+
+				<section>
+				<h2>Shaping Responses</h2>
+				<ul>
+				<li class="fragment">Your prompt can ask for JSON</li>
+				<li class="fragment">So can system instructions</li>
+				<li class="fragment">Be specific</li>
+				<li class="fragment">There's also a response type setting...</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Shaping Responses - 2</h2>
+				<ul>
+				<li class="fragment">By default, Gemini returns text in Markdown</li>
+				<li class="fragment">Even if you ask for JSON, it's JSON... in Markdown</li>
+				<li class="fragment">Setting the response type is essential!</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="language-javascript">
+const generationConfig = {
+	temperature: 0.9,
+	topK: 1,
+	topP: 1,
+	maxOutputTokens: 2048,
+	response_mime_type:'application/json'
+};
+
+await model.generateCOntent({
+	contents: [ { role: "user", [ {text:"prompt"} ] } ], 
+	generationConfig
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+					File is json_response.js, just text 
+					"What are the top reasons cats are good pets?"
+					then show the second one
+					</aside>
+				</section>
+
+
 			</div>
 		</div>
 
