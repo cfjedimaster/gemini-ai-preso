@@ -1,10 +1,13 @@
 
-definitions - with a focus on Gemini, how it compares to Vertex
 
-walkthrough of getting started - generating a key at least
+todo mention:
+function calling
+model tuning
+prompt strats
 
-AI Studio - demo it - 
+vertex
+notebooks
 
-Node code to make a prompt - talk about input, talk about output
-simplify demo
+resource links
 
+RAY - ensure you can run the demos you mention locally
