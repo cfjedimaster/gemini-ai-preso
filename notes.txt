@@ -1,12 +1,7 @@
 
 
-todo mention:
-function calling
-model tuning
-prompt strats
 
 vertex
-notebooks
 
 resource links
 
