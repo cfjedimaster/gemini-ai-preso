@@ -1,8 +1,8 @@
 
+Notes from May 18 preso:
+Too much material for 45 minutes, I skipped the demos completely.
+Move them to past Q/A?
+Make a slide talking about them as examples? (I think this is good.)
+Add notes to later code demos.
 
-
-vertex
-
-resource links
-
-RAY - ensure you can run the demos you mention locally
+file demo on AI Studio uses Files API - maybe switch to it?
