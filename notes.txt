@@ -6,3 +6,6 @@ Make a slide talking about them as examples? (I think this is good.)
 Add notes to later code demos.
 
 file demo on AI Studio uses Files API - maybe switch to it?
+
+Maybe switch Demos to Examples, make one slide.
+Maybe new demos are short but interesting, one idea - given a weather forecast, summarize (ive got this done already)
