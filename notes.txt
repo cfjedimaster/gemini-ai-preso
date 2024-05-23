@@ -9,3 +9,5 @@ file demo on AI Studio uses Files API - maybe switch to it?
 
 Maybe switch Demos to Examples, make one slide.
 Maybe new demos are short but interesting, one idea - given a weather forecast, summarize (ive got this done already)
+Given a folder of images, look for (name).txt, and if not there, get description of image, save it
+
