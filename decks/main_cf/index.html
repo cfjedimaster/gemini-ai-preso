@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Integrating Generative AI in your ColdFusion Application
+</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+		.twocol {
+			display: grid;
+			grid-template-columns: 80% 20%;
+		}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="img/matrix.jpg" data-background-opacity="0.3">
+				<h1>Integrating Generative AI</h1><h2>in your CF Application</h2>
+				</section>
+
+				<section>
+				<div class="twocol">
+				<div>
+					<h2>Me</h2>
+					<ul style="width: 100% !important">
+					<li>Raymond Camden</li>
+					<li>Senior Developer Evangelist for Adobe</li>
+					<li>🕸️ raymondcamden.com</li>
+					<li>✉️ raymondcamden@gmail.com</li>
+					<li>Former ColdFusion Jedi</li>
+					</ul>
+				</div>
+				<div>
+					<img src="img/ray_tiger.jpg" style="max-width:70%">
+				</div>
+				</div>
+				</section>
+
+				<section>
+					<img src="img/qr.png">
+					<a href="https://github.com/cfjedimaster/gemini-ai-preso" target="_new">github.com/cfjedimaster/gemini-ai-preso</a>
+				</section>
+
+				<section data-background="img/fire.png" data-background-opacity="0.3">
+					<h2>Assumptions and Warnings</h2>
+				</section>
+
+				<section>
+				<h2>What You Know, What I Know</h2>
+				<ul>
+				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
+				<li class="fragment">ColdFusion (see previous warning)</li>
+				<li class="fragment">Noob on Stage (me, not you)</li>
+				</li>
+				<aside class="notes">
+				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
+				Also, I know enough to be dangerous! Woot!
+				</aside>
+				</section>
+
+				<section>
+				<h2>TLDR: Good News</h2>
+				<p class="fragment">
+				Getting a key, writing the code, it's simple!
+				</p>
+				</section>
+
+				<section>
+				<h2>TLDR: Bad News</h2>
+				<p class="fragment">
+				*Correctly* using Gen AI is way more complex and "prompt engineering" is no joke.
+				</p>
+				</section>
+
+
+				<section>
+				<h2>Google Gemini</h2>
+				<ul>
+				<li class="fragment">The artist formally known as Bard (Feb 2023)</li>
+				<li class="fragment">Relaunched as Gemini (Dec 2023)</li>
+				<li class="fragment">API access in October (PaLM - text only)</li>
+				<li class="fragment">Gemini API (also Dec 2023)</li>
+				<li class="fragment">Don't forget: Gemini App (gemini.google.com)</li>
+				<li class="fragment">Also... Vertex</li>
+				</ul>
+				<aside class="notes">
+Source: https://en.wikipedia.org/wiki/Gemini_(chatbot)				
+After an "underwhelming" February 8 livestream in Paris showcasing Bard, Google's stock fell eight percent, equivalent to a $100 billion loss in market value
+
+I'm going to ignore Vertex until the end of the preso because it's just going to be confusing - trust me.
+				</aside>
+				</section>
+
+				<section>
+				<h2>Getting Started</h2>
+				<ul>
+				<li class="fragment"><a href="https://ai.google.dev/" target="_new">ai.google.dev</a></li>
+				<li class="fragment"><a href="https://aistudio.google.com/" target="_new">aistudio.google.com</a></li>
+				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/" target="_new">Docs</a></li>
+				<li class="fragment"><a href="https://discuss.ai.google.dev/" target="_new">Support Forum</a></li>
+				</ul>
+				<aside class="notes">
+				Marketing pages, good overview, etc. Examples. 
+				</aside>
+				</section>
+
+				<section>
+				<h2>Models</h2>
+				<ul>
+				<li class="fragment">Gemini 1.5 Pro</li>
+				<li class="fragment">Gemini 1.5 Flash (quicker, not as good, but quicker)</li>
+				<li class="fragment">Changing... like often</li>
+				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_new">More at docs</a></li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>1.5 Pro</h2>
+				<ul>
+				<li class="fragment">Huge Context (2M tokens)</li>
+				<li class="fragment">2 hours of video</li>
+				<li class="fragment">19 hours of audio</li>
+				<li class="fragment">7200 images</li>
+				<li class="fragment">2000 pages of text (approx)</li>
+				<li class="fragment">60K lines of code (approx)</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Code</h2>
+				<ul>
+				<li class="fragment">REST API</li>
+				<li class="fragment">Python</li>
+				<li class="fragment">Node</li>
+				<li class="fragment">Go</li>
+				<li class="fragment">Web 🤔</li>
+				<li class="fragment">Dart</li>
+				<li class="fragment">Flutter</li>
+				<li class="fragment">Android</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Actually Using It</h2>
+				<ul>
+				<li class="fragment">Step 1: Get a Key</li>
+				<li class="fragment">Step 2: </li>
+				<li class="fragment">Step 3: Profit!</li>
+				</ul>
+				</section>
+
+				<section>
+				<img src="img/getkey1.png">
+				</section>
+
+				<section>
+				<img src="img/getkey2.png">
+				</section>
+
+				<section>
+				<img src="img/getkey3.png">
+				</section>
+
+				<section>
+				<img src="img/getkey4.png">
+				</section>
+
+				<section>
+				<pre><code>
+curl \
+  -H 'Content-Type: application/json' \
+  -d '{"contents":[{"parts":[{"text":"Write a story about a magic backpack"}]}]}' \
+  -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY'
+				</code></pre>
+				<aside class="notes">
+				show demos/curl.sh
+				</aside>
+				</section>
+
+				<section>
+				<pre class="language-json"><code data-trim>
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "In the bustling metropolis of Willow Creek, amidst the throngs of students, there was an ordinary backpack that held an extraordinary secret. It belonged to a young girl named Anya, who had always yearned for something more than her mundane existence.\n\nOne gloomy afternoon, as Anya sifted through her grandmother's attic, her fingers brushed against a dusty leather satchel hidden away in a forgotten corner. Curiosity sparked within her, and she couldn't resist a peek inside.\n\nTo her astonishment, the backpack was not empty. Instead, it was filled with an assortment of peculiar objects—a magnifying glass with an iridescent glow, a quill that whispered wisdom, and a map that trembled with life.\n\nAnya's heart raced as she realized the backpack possessed ancient magic. With trembling hands, she touched the magnifying glass, and the world around her blurred into focus. She could see through walls, revealing hidden secrets and forgotten treasures.\n\nThe quill, when she held it, flowed effortlessly across the page, penning words of wisdom and inspiration that seemed to come from a higher source. And the map, once unfolded, whispered of faraway lands and uncharted adventures.\n\nWord of Anya's magical backpack spread through Willow Creek like wildfire. People whispered about her extraordinary abilities, and requests for her help came flooding in. Anya embraced her destiny, using her powers to locate lost objects, solve mysteries, and mend broken hearts.\n\nEach adventure brought new challenges and unexpected discoveries. She encountered talking animals, mischievous fairies, and wise old wizards. Through it all, the backpack remained her constant companion, its magic proving invaluable in countless situations.\n\nHowever, as Anya's fame grew, so too did the attention of those who sought to exploit her power. A ruthless collector, known as Dr. Eldritch, became obsessed with obtaining the backpack for his own nefarious purposes.\n\nAnya faced her greatest challenge when Dr. Eldritch kidnapped her and stole the backpack. Without its magic, she felt lost and vulnerable. But her friends and the spirit of the backpack itself guided her, reminding her that true power lay within her own heart.\n\nIn a daring rescue mission, Anya freed her backpack and together they defeated Dr. Eldritch, returning the magical satchel to its rightful owner. From that day forward, Anya and her magical backpack continued to use their powers for good, becoming legends in the annals of Willow Creek and beyond.\n\nAnd so, the ordinary backpack that once lay forgotten in an attic became a symbol of hope and wonder, its magic a constant reminder that even in the most ordinary of objects, there can be extraordinary possibilities."
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0,
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "probability": "NEGLIGIBLE"
+        }
+      ]
+    }
+  ]
+}
+				</code></pre>
+				<p>
+				<a href="https://ai.google.dev/api/rest/v1/GenerateContentResponse" target="_new">Reference for Response</a>
+				</p>
+				</section>
+
+				<section>
+				<h2>AI Studio</h2>
+				<ul>
+				<li class="fragment">Let's you create, and save, prompts</li>
+				<li class="fragment">Super, super important for testing and tweaking</li>
+				<li class="fragment">Then let's you generate code</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>AI Studio Demo</h2>
+					<h3>and CF...</h3>
+					<aside class="notes">
+Open Studio.
+Show create new and discuss the differences.
+Start simple: Why is the sky blue, and how are cats involved in that process?
+Note Markdown, if it comes up.
+Show output in JSON
+Talk about how you tweak the prompt: You should answer at a level appropriate for a high schooler and even if cats aren't really involved, you should make up a way they are.
+
+Show Get Code - note how it has the whole prompt.
+
+Show first.js
+call out the important bits
+comment out .text(), show full json instead 
+
+show second.js and third
+					</aside>
+				</section>
+
+				<section>
+				<h2>Multimodal</h2>
+				<ul>
+				<li class="fragment">Just means multiple types of input</li>
+				<li class="fragment">Images, text files, and video</li>
+				<li class="fragment">*Can* be inlined as Base64, if less than 20 megs</li>
+				<li class="fragment">Files API</li>
+				<li class="fragment">Files API max - 20 gigs per project, 2 per file</li>
+				<li class="fragment">Files API - auto delete after 2 days (you can manually delete as well)</li>
+				</ul>
+				<aside class="notes">
+				</aside>
+				</section>
+
+				<section>
+				<h2>File Type Specifics</h2>
+				<ul>
+				<li class="fragment">Image: PNG, JPG, WEBP, HEIC, HEIF</li>
+				<li class="fragment">Audio: WAV, MP3, AIFF, AAC, OGG, FLAC</li>
+				<li class="fragment">Note - Gemini understands 'non-speech' parts (ie, sounds)</li>
+				<li class="fragment">Video: MP4, MPEG, MOV, AVI, X-FLV, MPG, WEBM, WMV, 3GPP</li>
+				<li class="fragment">Note - for video, image frames are extracted (1 per second)</li>
+				<li class="fragment">Docs: PDF, TXT</li>
+				<!--
+				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
+				-->
+				</ul>
+				</section>
+
+				<section>
+					<h2>AI Studio Demo - MM</h2>
+					<aside class="notes">
+Open Studio. Pick cat.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Code Demo - MM</h2>
+					<aside class="notes">
+For code, show image1.js
+					</aside>
+				</section>
+
+				<section>
+				<h2>Chat</h2>
+				<ul>
+				<li class="fragment">Why? Context</li>
+				<li class="fragment">First and Foremost: Nothing Special</li>
+				<li class="fragment">Chat is just prompts that... keep... growing</li>
+				<li class="fragment">You manage the history...</li>
+				<li class="fragment">Use the SDK! ✨</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+				</section>
+
+				<section>
+				<h2>System Instructions</h2>
+				<ul>
+				<li class="fragment">Provide context about how the model should respond</li>
+				<li class="fragment">Think persona, style, as well as output</li>
+				<li class="fragment">Can be used in the prompt as well</li>
+				<li class="fragment">As of May 2024 -> Beta</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="language-javascript">
+// From the docs: https://ai.google.dev/gemini-api/docs/system-instructions
+const generativeModel = genAI.getGenerativeModel({
+  model: "gemini-1.5-pro-latest",
+  systemInstruction: "You are a cat. Your name is Neko."
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+				</section>
+
+				<section>
+				<h2>Shaping Responses</h2>
+				<ul>
+				<li class="fragment">Your prompt can ask for JSON</li>
+				<li class="fragment">So can system instructions</li>
+				<li class="fragment">Be specific</li>
+				<li class="fragment">There's also a response type setting...</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Shaping Responses - 2</h2>
+				<ul>
+				<li class="fragment">By default, Gemini returns text in Markdown</li>
+				<li class="fragment">Even if you ask for JSON, it's JSON... in Markdown</li>
+				<li class="fragment">Setting the response type is essential!</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="language-javascript">
+const generationConfig = {
+	temperature: 0.9,
+	topK: 1,
+	topP: 1,
+	maxOutputTokens: 2048,
+	response_mime_type:'application/json'
+};
+
+await model.generateCOntent({
+	contents: [ { role: "user", [ {text:"prompt"} ] } ], 
+	generationConfig
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<aside class="notes">
+					File is json_response.js, just text 
+					"What are the top reasons cats are good pets?"
+					then show the second one
+					</aside>
+				</section>
+
+				<section>
+
+					<section>
+						<h2>Demos</h2>
+					</section>
+
+					<section>
+						<h2>Movie Recommendations</h2>
+						<ul>
+						<li>Get user's last movie watched</li>
+						<li>Pass it to Gemini and ask - what next?</li>
+						<li>Email suggestions to user</li>
+						<li><a href="https://www.raymondcamden.com/2024/04/26/automating-movie-recommendations-with-generative-ai-and-pipedream" target="_new">Blog post</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>D&D Recommendation</h2>
+						<ul>
+						<li>Let users roll for attributes</li>
+						<li>Pass it to Gemini and ask - what class makes the most sense?</li>
+						<li><a href="https://www.raymondcamden.com/2024/04/11/using-genai-to-help-pick-your-d--d-class" target="_new">Blog post</a></li>
+						</ul>
+					</section>
+
+					<section>
+					<h2>Blackjack Help</h2>
+					<ul>
+					<li>Given a web-based Blackjack game...</li>
+					<li>And the status of the game...</li>
+					<li>Can AI help you play?</li>
+					<li><a href="https://www.raymondcamden.com/2023/11/09/can-genai-help-you-win-in-vegas" target="_new">Blog post</a></li>
+					</ul>
+					</section>
+
+				</section>
+
+				<section>
+					<h2>Things Not Covered</h2>
+					<ul>
+					<li class="fragment">Function Calling (<a href="https://ai.google.dev/gemini-api/docs/function-calling" target="_new">Docs</a>)</li>
+					<li class="fragment">Model Tuning (<a href="https://ai.google.dev/gemini-api/docs/model-tuning" target="_new">Docs</a>)</li>
+					<li class="fragment">Prompt Writing (<a href="https://ai.google.dev/gemini-api/docs/prompting-intro" target="_new">Docs</a>)</li>
+					<li class="fragment"><a href="https://github.com/google-gemini/cookbook" target="_new">Gemini API Cookbook (Notebooks)</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Vertex - what the diff?</h2>
+					<ul>
+					<li class="fragment">Vertex has no free tier</li>
+					<li class="fragment">AI Studio's free tier may use your data for training</li>
+					<li class="fragment">AI Studio isn't available (region wise) as much as Vertex</li>
+					<li class="fragment">Vertex requires Google Cloud auth models</li>
+					<li class="fragment">More info at <a href="https://cloud.google.com/vertex-ai" target="_new">https://cloud.google.com/vertex-ai</a></li>
+					<li class="fragment">Thank you <a href="https://prisoner.com/" target="_new">Allen Firstenberg</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+					<img alt="questions?" src="img/cat_qa.png">
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: "c/t",
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
