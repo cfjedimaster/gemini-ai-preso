@@ -282,7 +282,7 @@ show second.js and third
 				<li class="fragment">Note - Gemini understands 'non-speech' parts (ie, sounds)</li>
 				<li class="fragment">Video: MP4, MPEG, MOV, AVI, X-FLV, MPG, WEBM, WMV, 3GPP</li>
 				<li class="fragment">Note - for video, image frames are extracted (1 per second)</li>
-				<li class="fragment">Docs: PDF, TXT</li>
+				<li class="fragment">Docs: PDF, TXT, Markdown, CSV</li>
 				<!--
 				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
 				-->
@@ -311,6 +311,7 @@ For code, show image1.js
 				<li class="fragment">Chat is just prompts that... keep... growing</li>
 				<li class="fragment">You manage the history...</li>
 				<li class="fragment">Use the SDK! ✨</li>
+				<li class="fragment">Except we can't 😭</li>
 				</ul>
 				</section>
 
@@ -324,17 +325,20 @@ For code, show image1.js
 				<li class="fragment">Provide context about how the model should respond</li>
 				<li class="fragment">Think persona, style, as well as output</li>
 				<li class="fragment">Can be used in the prompt as well</li>
-				<li class="fragment">As of May 2024 -> Beta</li>
 				</ul>
 				</section>
 
 				<section>
 				<pre><code class="language-javascript">
-// From the docs: https://ai.google.dev/gemini-api/docs/system-instructions
-const generativeModel = genAI.getGenerativeModel({
-  model: "gemini-1.5-pro-latest",
-  systemInstruction: "You are a cat. Your name is Neko."
-});
+
+"systemInstruction": {
+    "role": "user",
+    "parts": [
+      {
+        "text": "You are a cat. Your name is Neko."
+      }
+    ]
+}
 				</code></pre>
 				</section>
 
@@ -363,18 +367,14 @@ const generativeModel = genAI.getGenerativeModel({
 
 				<section>
 				<pre><code class="language-javascript">
-const generationConfig = {
-	temperature: 0.9,
-	topK: 1,
-	topP: 1,
-	maxOutputTokens: 2048,
-	response_mime_type:'application/json'
-};
+"generationConfig": {
+	"temperature": 1,
+	"topK": 64,
+	"topP": 0.95,
+	"maxOutputTokens": 8192,
+	"responseMimeType": "application/json"
+}
 
-await model.generateCOntent({
-	contents: [ { role: "user", [ {text:"prompt"} ] } ], 
-	generationConfig
-});
 				</code></pre>
 				</section>
 
