@@ -8,4 +8,23 @@ function md2HTML(str) {
 	return hm.render(doc);
 
 }
+
+function slugify(s, sep="-") {
+	// replace any non a-z number with sep
+	s = s.reReplaceNoCase('[^a-z\d]', '#arguments.sep#','all');
+
+	// remove training sep
+	while(right(s,1) === arguments.sep) {
+		s = s.mid(1, len(s) - 1);
+	}
+	// remove initial sep
+	while(left(s,1) === arguments.sep) {
+		s = s.mid(2, len(s));
+	}
+	
+	// lowercase
+	s = s.lcase();
+	return s;
+}
+
 </cfscript>

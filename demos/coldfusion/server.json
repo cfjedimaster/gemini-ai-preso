@@ -8,6 +8,6 @@
     },
     "trayEnable":"false",
     "scripts":{
-        "onServerInstall": "cfpm instal cffeed"
+        "onServerInitialInstall":"cfpm instal cffeed"
     }
 }
