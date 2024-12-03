@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@google/generative-ai": "^0.10.0"
+    "@google/generative-ai": "^0.21.0",
+    "@sindresorhus/slugify": "^2.2.1"
   }
 }

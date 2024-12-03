@@ -116,8 +116,7 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<section>
 				<h2>Models</h2>
 				<ul>
-				<li class="fragment">Gemini 1.0 Pro (Text only)</li>
-				<li class="fragment">Gemini 1.5 Pro (Text + Images, Preview)</li>
+				<li class="fragment">Gemini 1.5 Pro</li>
 				<li class="fragment">Gemini 1.5 Flash (quicker, not as good, but quicker)</li>
 				<li class="fragment">Changing... like often</li>
 				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_new">More at docs</a></li>
@@ -127,13 +126,12 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<section>
 				<h2>1.5 Pro</h2>
 				<ul>
-				<li class="fragment">Huge Context (1M tokens)</li>
-				<li class="fragment">1 hour of video</li>
-				<li class="fragment">9.5 hours of audio</li>
-				<li class="fragment">3600 images</li>
-				<li class="fragment">1000 pages of text (approx)</li>
-				<li class="fragment">30K lines of code (approx)</li>
-				<li class="fragment">2M context size coming soon</li>
+				<li class="fragment">Huge Context (2M tokens)</li>
+				<li class="fragment">2 hours of video</li>
+				<li class="fragment">19 hours of audio</li>
+				<li class="fragment">7200 images</li>
+				<li class="fragment">2000 pages of text (approx)</li>
+				<li class="fragment">60K lines of code (approx)</li>
 				</ul>
 				</section>
 
@@ -245,14 +243,17 @@ curl \
 				<section>
 					<h2>AI Studio Demo</h2>
 					<p>
-					Show AI Studio, code output, and then first and second.cfm
+					Show AI Studio, code output, and then first and second.js
 					</p>
 					<aside class="notes">
 Open Studio.
 Show create new and discuss the differences.
 Start simple: Why is the sky blue, and how are cats involved in that process?
-Note Markdown, if it comes up.
-Show output in JSON
+
+Note how it's got the response
+
+Note how its a chat session 
+
 Talk about how you tweak the prompt: You should answer at a level appropriate for a high schooler and even if cats aren't really involved, you should make up a way they are.
 
 Show Get Code - note how it has the whole prompt.
@@ -271,8 +272,8 @@ show second.js
 				<li class="fragment">Just means multiple types of input</li>
 				<li class="fragment">Images, text files, and video</li>
 				<li class="fragment">*Can* be inlined as Base64, if less than 20 megs</li>
-				<li class="fragment">Files API (code samples in Python only)</li>
-				<li class="fragment">Files API max - 20 gigs per project, 2 per file</li>
+				<li class="fragment">Files API</li>
+				<li class="fragment">Files API max - 20 gigs per project, 2 gig per file</li>
 				<li class="fragment">Files API - auto delete after 2 days (you can manually delete as well)</li>
 				</ul>
 				<aside class="notes">
@@ -284,15 +285,33 @@ show second.js
 				<ul>
 				<li class="fragment">Image: PNG, JPG, WEBP, HEIC, HEIF</li>
 				<li class="fragment">Audio: WAV, MP3, AIFF, AAC, OGG, FLAC</li>
+				<li class="fragment">Note - Gemini understands 'non-speech' parts (ie, sounds)</li>
 				<li class="fragment">Video: MP4, MPEG, MOV, AVI, X-FLV, MPG, WEBM, WMV, 3GPP</li>
+				<li class="fragment">Note - for video, image frames are extracted (1 per second)</li>
+				<li class="fragment">Docs: PDF, TXT, Markdown, CSV</li>
+				<!--
 				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
+				-->
 				</ul>
 				</section>
 
 				<section>
 					<h2>AI Studio Demo - MM</h2>
+					<p>
+					In AI Studio, upload the cat!
+					</p>
 					<aside class="notes">
 Open Studio. Pick cat.
+For code, show image1.js
+					</aside>
+				</section>
+
+				<section>
+					<h2>Code Demo - MM</h2>
+					<p>
+					Show image1.mjs, and possibly image2.mjs and the fun one.
+					</p>
+					<aside class="notes">
 For code, show image1.js
 					</aside>
 				</section>
@@ -310,6 +329,9 @@ For code, show image1.js
 
 				<section>
 					<h2>Demo</h2>
+					<p> 
+					Show chat
+					</p>
 				</section>
 
 				<section>
@@ -318,7 +340,6 @@ For code, show image1.js
 				<li class="fragment">Provide context about how the model should respond</li>
 				<li class="fragment">Think persona, style, as well as output</li>
 				<li class="fragment">Can be used in the prompt as well</li>
-				<li class="fragment">As of May 2024 -> Beta</li>
 				</ul>
 				</section>
 
@@ -334,6 +355,9 @@ const generativeModel = genAI.getGenerativeModel({
 
 				<section>
 					<h2>Demo</h2>
+					<p> 
+					Show si1 and si2
+					</p>
 				</section>
 
 				<section>
@@ -365,7 +389,7 @@ const generationConfig = {
 	response_mime_type:'application/json'
 };
 
-await model.generateCOntent({
+await model.generateContent({
 	contents: [ { role: "user", [ {text:"prompt"} ] } ], 
 	generationConfig
 });
@@ -374,6 +398,30 @@ await model.generateCOntent({
 
 				<section>
 					<h2>Demo</h2>
+					<p>
+					Show json_response.js + json_response2.js
+					</p>
+					<aside class="notes">
+					File is json_response.js, just text 
+					"What are the top reasons cats are good pets?"
+					then show the second one
+					</aside>
+				</section>
+
+				<section>
+				<h2>Shaping Responses - 3</h2>
+				<ul>
+				<li class="fragment">JSON Schema</li>
+				<li class="fragment">Let's you specify *exactly* what you want</li>
+				<li class="fragment">Learning JSON Schema: <a href="https://json-schema.org/" target="_blank">json-schema.org</a></li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<p>
+					Show json_response3.js 
+					</p>
 					<aside class="notes">
 					File is json_response.js, just text 
 					"What are the top reasons cats are good pets?"
@@ -384,7 +432,7 @@ await model.generateCOntent({
 				<section>
 
 					<section>
-						<h2>Demos</h2>
+						<h2>Examples</h2>
 					</section>
 
 					<section>
