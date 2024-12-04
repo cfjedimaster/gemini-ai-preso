@@ -37,6 +37,8 @@
 					<li>Senior Developer Evangelist for Adobe</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
+					<li>@raymondcamden.com (Bluesky)</li>
+					<li>@raymondcamden (Mastodon)</li>
 					</ul>
 				</div>
 				<div>
@@ -140,7 +142,7 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<ul>
 				<li class="fragment">REST API</li>
 				<li class="fragment">Python</li>
-				<li class="fragment">Node</li>
+				<li class="fragment">Node ✨</li>
 				<li class="fragment">Go</li>
 				<li class="fragment">Web 🤔</li>
 				<li class="fragment">Dart</li>
@@ -243,7 +245,7 @@ curl \
 				<section>
 					<h2>AI Studio Demo</h2>
 					<p>
-					Show AI Studio, code output, and then first and second.js
+					Show AI Studio, code output, and then first
 					</p>
 					<aside class="notes">
 Open Studio.
@@ -262,8 +264,64 @@ Show first.js
 call out the important bits
 comment out .text(), show full json instead 
 
-show second.js
 					</aside>
+				</section>
+
+				<section>
+				<h2>Node SDK</h2>
+				<ul>
+				<li class="fragment"><code>npm install @google/generative-ai</code></li>
+				<li class="fragment">Repo: <a href="https://github.com/google-gemini/generative-ai-js" target="_blank">github.com/google-gemini/generative-ai-js</a></li>
+				<li class="fragment">Better docs: <a href="https://github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/generative-ai.md" target="_blank">github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/generative-ai.md</a></li>
+				</ul>
+				<aside class="notes">
+				You can find docs there but you have to dig a bit
+				</aside>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="">
+// Adapted from Quick Start
+// Load SDK and initialize with key
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="6,7">
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+//specify a prompt
+const prompt = "Explain cats";
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="8-10">
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+const prompt = "Explain cats";
+
+// pass prompt and dump result
+const result = await model.generateContent(prompt);
+console.log(result.response.text());
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<p>
+					Show second.js
+					</p>
 				</section>
 
 				<section>
