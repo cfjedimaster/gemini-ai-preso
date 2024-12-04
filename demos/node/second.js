@@ -7,10 +7,10 @@ const MODEL_NAME = "gemini-1.5-pro";
 const API_KEY = process.env.GEMINI_API_KEY;
 
 async function processPrompt(prompt) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  let genAI = new GoogleGenerativeAI(API_KEY);
+  let model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
-  const result = await model.generateContent(prompt);
+  let result = await model.generateContent(prompt);
 
   return result.response.text();
 }
