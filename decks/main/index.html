@@ -34,7 +34,7 @@
 					<h2>Me</h2>
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
-					<li>Senior Developer Evangelist for Adobe</li>
+					<li>Principal Developer Evangelist for Adobe</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>@raymondcamden.com (Bluesky)</li>
@@ -601,6 +601,56 @@ await model.generateContent({
 				<img src="img/dragons.jpg">
 				</section>
 
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="">
+// do we support it at all?
+if(!window.ai) return;
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="4-6">
+// do we support it at all?
+if(!window.ai) return;
+
+// is the model actually ready? 
+let ready = (await window.ai.languageModel.capabilities()).available;
+if(ready !== 'readily') return;
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="8-9">
+// do we support it at all?
+if(!window.ai) return;
+
+// is the model actually ready? 
+let ready = (await window.ai.languageModel.capabilities()).available;
+if(ready !== 'readily') return;
+
+// this is what you work with...
+let session = await window.ai.languageModel.create();
+
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim data-line-numbers="11-12">
+// do we support it at all?
+if(!window.ai) return;
+
+// is the model actually ready? 
+let ready = (await window.ai.languageModel.capabilities()).available;
+if(ready !== 'readily') return;
+
+// this is what you work with...
+let session = await window.ai.languageModel.create();
+
+// will return markdown
+let result = await session.prompt("why are cats so... cat?");
+
+				</code></pre>
+				</section>
 				<section>
 					<h2>Demo</h2>
 					<p>

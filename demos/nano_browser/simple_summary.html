@@ -12,6 +12,10 @@
 	body {
 		margin: 20px;
 	}	
+
+	textarea {
+		height: 500px;
+	}
 	</style>
 </head>
 <body>
@@ -59,7 +63,7 @@ document.addEventListener('alpine:init', () => {
 			if(this.input === '') return;
 			this.result = '<i>Working...</i>';
 			try {
-				this.result = await this.summarizer.summarize(this.input);
+				this.result = marked.parse(await this.summarizer.summarize(this.input));
 			} catch(e) {
 				console.log('window.ai pooped the bed', e);
 			}
