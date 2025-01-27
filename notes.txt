@@ -1,3 +1,6 @@
+Notes from Sep 30:
+Make the CF code clearer on a slide. Brian did a great job with this.
+At least the HTTP calls.
 
 Notes from May 18 preso:
 Too much material for 45 minutes, I skipped the demos completely.
