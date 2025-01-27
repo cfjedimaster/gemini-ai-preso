@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+	<style>
+	[x-cloak] { display: none !important; }
+
+	body {
+		margin: 20px;
+	}	
+
+	textarea {
+		height: 500px;
+	}
+	</style>
+</head>
+<body>
+
+
+<h2>window.ai demo</h2>
+
+<div x-data="app">
+	<div x-show="!hasAI">
+		Sorry, no AI for you. Have a nice day.
+	</div>
+	<div x-show="hasAI">
+		<div class="row">
+			<div class="column">
+				<label for="input">Text to Summarize: </label>
+			</div>
+			<div class="column column-90">
+				<textarea x-model="input" id="input">		
+				</textarea>
+			</div>
+		</div>
+		<button @click="doSummary">Summarize</button>
+		<p x-html="result"></p>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('app', () => ({
+		hasAI:false,
+		input:"",
+		result:"",
+		summarizer:null,
+		async init() {
+			if(window.ai) {
+				let ready = (await window.ai.summarizer.capabilities()).available;
+				if(ready === 'readily') this.hasAI = true;
+				else alert('Browser has AI, but not ready.');
+				this.summarizer = await window.ai.summarizer.create();
+			}
+		},
+		async doSummary() {
+			if(this.input === '') return;
+			this.result = '<i>Working...</i>';
+			try {
+				this.result = marked.parse(await this.summarizer.summarize(this.input));
+			} catch(e) {
+				console.log('window.ai pooped the bed', e);
+			}
+		}
+  }))
+});
+
+</script>
+</body>
+</html>

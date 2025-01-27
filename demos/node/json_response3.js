@@ -10,24 +10,34 @@ async function processPrompt(prompt, mimetype="text/plain") {
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
+	const schema = {
+		"description": "A scientific answer with resources",
+		"type": "object",
+		"properties": {
+			"answer": {
+				"type":"string"
+			},
+			"sources":{
+				"type":"array",
+				"items": {
+					"type":"string"
+				}
+			}
+		}
+	};
+
   const generationConfig = {
     temperature: 1,
     topK: 0,
     topP: 0.95,
     maxOutputTokens: 8192,
-    response_mime_type:mimetype
-
+    response_mime_type:mimetype,
+    responseSchema: schema
   };
 
   const parts = [
     {text: `
-    For the prompt given below, your answer should be returned in a JSON array with each
-    array element containing a summary and a link to research that backs it up. The result
-    should look like this:
-
-    [
-      { reason: "reason here", link: "link to a reference" }
-    ]
+    For the prompt given below, return both answers and links to resources.
     
     Prompt: ${prompt}
     `}];
