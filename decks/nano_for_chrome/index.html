@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>AI in the Browser with Gemini Nano</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+		.twocol {
+			display: grid;
+			grid-template-columns: 80% 20%;
+		}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="img/matrix.jpg" data-background-opacity="0.3">
+				<h1>AI in the Browser with Gemini Nano</h2>
+				</section>
+
+				<section>
+				<div class="twocol">
+				<div>
+					<h2>Me</h2>
+					<ul style="width: 100% !important">
+					<li>Raymond Camden</li>
+					<li>Developer Evangelist for Hire!</li>
+					<li>🕸️ raymondcamden.com</li>
+					<li>✉️ raymondcamden@gmail.com</li>
+					<li>@raymondcamden.com (Bluesky)</li>
+					<li>@raymondcamden (Mastodon)</li>
+					<li>Also, hire me!</li>
+					</ul>
+				</div>
+				<div>
+					<img src="img/ray_tiger.jpg" style="max-width:70%">
+				</div>
+				</div>
+				</section>
+
+				<section>
+					<img src="img/qr.png">
+					<a href="https://github.com/cfjedimaster/gemini-ai-preso" target="_new">github.com/cfjedimaster/gemini-ai-preso</a>
+				</section>
+
+				<section data-background="img/fire.png" data-background-opacity="0.3">
+					<h2>Assumptions and Warnings</h2>
+				</section>
+
+				<section>
+				<h2>What You Know, What I Know</h2>
+				<ul>
+				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
+				<li class="fragment">JavaScript (good parts, bad parts, meh parts)</li>
+				<li class="fragment">Noob on Stage (me, not you)</li>
+				</li>
+				<aside class="notes">
+				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
+				Also, I know enough to be dangerous! Woot!
+				</aside>
+				</section>
+
+				<section>
+				<h2>TLDR</h2>
+				<ul>
+				<li class="fragment">Chrome is bringing Gen AI to the Web</li>
+				<li class="fragment">Everyone is 100% ok with that!</li>
+				<li class="fragment">Uses the Nano model (small... relatively speaking)</li>
+				<li class="fragment">Currently in Early Preview</li>
+				<li class="fragment">Task Focused (not general purpose)</li>
+				<li class="fragment">Outside of getting the model, 100% on device</li>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Gemini Nano for Chrome</a></li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Enabling</h2>
+				<ul>
+				<li class="fragment">Join the Program: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZXeiwj9KO9jMctffHPym88ln12xNWCrVkMY_u06WfSTulQg/viewform" target="_blank">Form</a></li>
+				<li class="fragment">Flags and bits</li>
+				</ul>
+				<p>
+				<img class="fragment" src="img/magic.gif">
+				</p>
+				</section>
+
+				<section>
+				<h2>APIs/Features</h2>
+				<ul>
+				<li class="fragment">Translator</li>
+				<li class="fragment">Language Detector</li>
+				<li class="fragment">Summarizer (Also Writer/Rewriter)</li>
+				<li class="fragment">Streaming</li>
+				<li class="fragment">Sessions</li>
+				<li class="fragment">System Instructions</li>
+				<li class="fragment"><s>Multimodal (images, files etc)</s></li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>An Example</h2>
+				<p>
+				Based on <a href="https://developer.chrome.com/docs/ai/summarizer-api" target="_blank">Summarizer Doc</a>
+				</p>
+				</section>
+
+				<section>
+				<pre><code data-trim class="javascript">
+// First, see if we support AI at all 
+// and check for the Summarizer specifically
+
+// we could alert the user or just not enable AI func
+if(!window.ai || !window.ai.summarizer) return;
+
+				</code></pre>
+				</section>
+
+				<section>
+				<pre><code data-trim class="javascript">
+if(!window.ai || !window.ai.summarizer) return;
+
+// is it ready to go...
+let ready = (await window.ai.summarizer.capabilities()).available;
+// returns: no, after-download, or readily
+
+				</code></pre>
+				</section>
+
+				<section>
+				<pre><code data-trim class="javascript">
+if(!window.ai || !window.ai.summarizer) return;
+
+let ready = (await window.ai.summarizer.capabilities()).available;
+if(ready !== 'readily') return;
+
+let summarizer = await window.ai.summarizer.create();
+
+/*
+create options:
+	sharedContext - additional info to help summarizing
+	type - "key-points" (default), "tl;dr", "teaser", "headline"
+	format - "markdown" (default), "plain-text"
+	length: "short", "medium" (default), "long" 
+*/
+				</code></pre>
+				</section>
+
+				<section>
+				<pre><code data-trim class="javascript">
+if(!window.ai || !window.ai.summarizer) return;
+
+let ready = (await window.ai.summarizer.capabilities()).available;
+if(ready !== 'readily') return;
+
+let summarizer = await window.ai.summarizer.create();
+
+let summary = await summarizer.summarize(input);
+
+/*
+summarize takes a second optional argument to provide more context
+*/
+				</code></pre>
+				</section>		
+
+				<section>
+				<h2>Example</h2>
+				<p>
+				<a href="/demos/nano_browser/simple_summary.html" target="_blank">Summary</a>
+				</p>
+				</section>
+
+				<section>
+				<h2>But wait - there's more...</h2>
+				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Main docs</a></li>
+				<li class="fragment"><a href="https://www.raymondcamden.com/tags/generative+ai" target="_blank">My AI articles</a></li>
+				</ul>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: "c/t",
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

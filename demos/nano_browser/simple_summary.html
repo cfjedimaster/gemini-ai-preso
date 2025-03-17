@@ -54,6 +54,7 @@ document.addEventListener('alpine:init', () => {
 		async init() {
 			if(window.ai) {
 				let ready = (await window.ai.summarizer.capabilities()).available;
+				console.log('ready', ready);
 				if(ready === 'readily') this.hasAI = true;
 				else alert('Browser has AI, but not ready.');
 				this.summarizer = await window.ai.summarizer.create();

@@ -34,7 +34,7 @@
 					<h2>Me</h2>
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
-					<li>Principal Developer Evangelist for Adobe</li>
+					<li>Developer Evangelist for Hire!</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>@raymondcamden.com (Bluesky)</li>
@@ -60,9 +60,10 @@
 				<h2>What You Know, What I Know</h2>
 				<ul>
 				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
-				<li class="fragment">Node.js (barely!!)</li>
+				<li class="fragment">Node.js, Python, etc (basic level)</li>
+				<!--
 				<li class="fragment">Noob on Stage (me, not you)</li>
-				</li>
+				-->
 				<aside class="notes">
 				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
 				Also, I know enough to be dangerous! Woot!
@@ -119,12 +120,15 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<h2>Models</h2>
 				<ul>
 				<li class="fragment">Gemini 1.5 Pro</li>
-				<li class="fragment">Gemini 1.5 Flash (quicker, not as good, but quicker)</li>
+				<li class="fragment">Gemini 2.0 Flash (quicker, not as deep) 🆕</li>
+				<li class="fragment">Gemini 2.0 Flash-Lite (optimized for cost + latency)</li>
+				<li class="fragment">There's more and...</li>
 				<li class="fragment">Changing... like often</li>
 				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_new">More at docs</a></li>
 				</ul>
 				</section>
 
+				<!--
 				<section>
 				<h2>1.5 Pro</h2>
 				<ul>
@@ -136,13 +140,14 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<li class="fragment">60K lines of code (approx)</li>
 				</ul>
 				</section>
+				-->
 
 				<section>
 				<h2>Code</h2>
 				<ul>
 				<li class="fragment">REST API</li>
 				<li class="fragment">Python</li>
-				<li class="fragment">Node ✨</li>
+				<li class="fragment">Node</li>
 				<li class="fragment">Go</li>
 				<li class="fragment">Web 🤔</li>
 				<li class="fragment">Dart</li>
@@ -182,7 +187,7 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 curl \
   -H 'Content-Type: application/json' \
   -d '{"contents":[{"parts":[{"text":"Write a story about a magic backpack"}]}]}' \
-  -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY'
+  -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=YOUR_API_KEY'
 				</code></pre>
 				<p>
 				Show demos/curh.sh
@@ -200,34 +205,35 @@ curl \
       "content": {
         "parts": [
           {
-            "text": "In the bustling metropolis of Willow Creek, amidst the throngs of students, there was an ordinary backpack that held an extraordinary secret. It belonged to a young girl named Anya, who had always yearned for something more than her mundane existence.\n\nOne gloomy afternoon, as Anya sifted through her grandmother's attic, her fingers brushed against a dusty leather satchel hidden away in a forgotten corner. Curiosity sparked within her, and she couldn't resist a peek inside.\n\nTo her astonishment, the backpack was not empty. Instead, it was filled with an assortment of peculiar objects—a magnifying glass with an iridescent glow, a quill that whispered wisdom, and a map that trembled with life.\n\nAnya's heart raced as she realized the backpack possessed ancient magic. With trembling hands, she touched the magnifying glass, and the world around her blurred into focus. She could see through walls, revealing hidden secrets and forgotten treasures.\n\nThe quill, when she held it, flowed effortlessly across the page, penning words of wisdom and inspiration that seemed to come from a higher source. And the map, once unfolded, whispered of faraway lands and uncharted adventures.\n\nWord of Anya's magical backpack spread through Willow Creek like wildfire. People whispered about her extraordinary abilities, and requests for her help came flooding in. Anya embraced her destiny, using her powers to locate lost objects, solve mysteries, and mend broken hearts.\n\nEach adventure brought new challenges and unexpected discoveries. She encountered talking animals, mischievous fairies, and wise old wizards. Through it all, the backpack remained her constant companion, its magic proving invaluable in countless situations.\n\nHowever, as Anya's fame grew, so too did the attention of those who sought to exploit her power. A ruthless collector, known as Dr. Eldritch, became obsessed with obtaining the backpack for his own nefarious purposes.\n\nAnya faced her greatest challenge when Dr. Eldritch kidnapped her and stole the backpack. Without its magic, she felt lost and vulnerable. But her friends and the spirit of the backpack itself guided her, reminding her that true power lay within her own heart.\n\nIn a daring rescue mission, Anya freed her backpack and together they defeated Dr. Eldritch, returning the magical satchel to its rightful owner. From that day forward, Anya and her magical backpack continued to use their powers for good, becoming legends in the annals of Willow Creek and beyond.\n\nAnd so, the ordinary backpack that once lay forgotten in an attic became a symbol of hope and wonder, its magic a constant reminder that even in the most ordinary of objects, there can be extraordinary possibilities."
+            "text": "Maya found the backpack in the attic of her grandmother's rambling Victorian house. It was tucked away in a cobweb-draped corner, behind a dusty rocking horse and a stack of chipped porcelain dolls. The backpack was unremarkable at first glance: faded brown canvas with worn leather straps. But as she lifted it, a faint shimmer danced across its surface, and a whisper of warmth tickled her fingers.\n\nIntrigued, Maya brushed off the dust and carried it downstairs. Her grandmother, Nana Willow, was humming by the fireplace, knitting a scarf that stretched seemingly endlessly.\n\n\"Nana, look what I found!\" Maya exclaimed, holding up the backpack.\n\nNana Willow's eyes twinkled. \"Ah, the Wanderer's Pack. I wondered when someone would find it again.\"\n\n\"The Wanderer's Pack? What is it?\"\n\nNana Willow chuckled. \"Let's just say it's... helpful. It holds whatever you need, whenever you need it. But be warned, Maya. It only gives what is truly necessary, not always what you desire.\"\n\nMaya, a pragmatic girl who loved hiking and the outdoors, couldn't resist. The next morning, she packed a lunch, a water bottle, and a map into her usual backpack, and then, on a whim, she slung the Wanderer's Pack over her other shoulder.\n\nShe set off on her favorite trail, a challenging climb that rewarded with breathtaking views from the mountain's peak. Halfway up, her water bottle ran dry, and her legs began to ache. Remembering the Wanderer's Pack, she reached inside, expecting to find a refreshing drink. Instead, her fingers brushed against a small, smooth stone.\n\nDisappointed, she pulled it out. It was an ordinary river stone, cool and slightly damp. Scowling, she almost tossed it aside, but then she noticed a small, trickling spring hidden beneath a mossy boulder. Without the stone, she wouldn't have paused to look. The spring offered the freshest, coldest water she'd ever tasted.\n\nLater, as she navigated a particularly steep and rocky section, she stumbled, twisting her ankle. Fear flashed through her, knowing she was miles from help. She desperately reached into the Wanderer's Pack. This time, she pulled out not a bandage, but a short, sturdy walking stick. It wasn't what she wanted, but it provided the support she needed to hobble her way to a more stable area.\n\nAs she reached the summit, exhausted but exhilarated, she finally understood. The Wanderer's Pack didn't grant wishes; it provided what she truly *needed* to overcome her challenges.\n\nOver the next few weeks, Maya used the backpack often. She needed inspiration for a school project and found a collection of bird feathers that sparked an idea for a stunning nature diorama. She yearned for a new bike and found a rusty wrench that she used to fix up an old one she’d abandoned in the garage.\n\nOne day, her best friend, Liam, was devastated after losing his dog, Buster. Maya desperately wanted to cheer him up, to magically bring Buster back. She reached into the backpack with fervent hope. She pulled out… nothing. The bag was empty.\n\nHeartbroken, she sat beside Liam, offering a shoulder to cry on and a listening ear. She realized then that the greatest need wasn't always a tangible object. Sometimes, it was just presence, empathy, and unwavering support.\n\nThat night, she sat by the fire with Nana Willow.\n\n\"I understand now,\" Maya said, \"The Wanderer's Pack gives you what you need, not what you want. But sometimes, what you need is… nothing.\"\n\nNana Willow smiled knowingly. \"Sometimes, Maya, the greatest gifts are the ones we already possess – our strength, our compassion, and our ability to be there for each other.\"\n\nMaya returned the Wanderer's Pack to its place in the attic. She knew it would always be there, a silent reminder that true magic wasn't about instant gratification, but about resourcefulness, resilience, and the enduring power of human connection. And sometimes, that was all you truly needed.\n"
           }
         ],
         "role": "model"
       },
       "finishReason": "STOP",
-      "index": 0,
-      "safetyRatings": [
-        {
-          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HATE_SPEECH",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HARASSMENT",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-          "probability": "NEGLIGIBLE"
-        }
-      ]
+      "avgLogprobs": -0.53034632891074
     }
-  ]
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 7,
+    "candidatesTokenCount": 870,
+    "totalTokenCount": 877,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 7
+      }
+    ],
+    "candidatesTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 870
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.0-flash"
 }
+
 				</code></pre>
 				<p>
 				<a href="https://ai.google.dev/api/rest/v1/GenerateContentResponse" target="_new">Reference for Response</a>
@@ -268,6 +274,12 @@ comment out .text(), show full json instead
 					</aside>
 				</section>
 
+			<section>
+
+				<section>
+					<h2>Node</h2>
+				</section>
+
 				<section>
 				<h2>Node SDK</h2>
 				<ul>
@@ -287,7 +299,7 @@ comment out .text(), show full json instead
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 				</code></pre>
 				</section>
 
@@ -296,7 +308,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 //specify a prompt
 const prompt = "Explain cats";
@@ -308,7 +320,7 @@ const prompt = "Explain cats";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 const prompt = "Explain cats";
 
@@ -324,6 +336,59 @@ console.log(result.response.text());
 					Show second.js
 					</p>
 				</section>
+
+			</section>
+
+			<section>
+
+				<section>
+					<h2>Python</h2>
+				</section>
+
+				<section>
+				<h2>Python SDK</h2>
+				<ul>
+				<li class="fragment"><code>pip install -q -U google-genai</code></li>
+				<li class="fragment">Repo: <a href="https://pypi.org/project/google-genai/" target="_blank">pypi.org/project/google-genai/</a></li>
+
+				</ul>
+				<aside class="notes">
+				</aside>
+				</section>
+
+				<section>
+				<pre class="language-python"><code data-trim data-line-numbers="">
+# Adapted from Quick Start
+
+from google import genai
+
+client = genai.Client(api_key="YOUR_API_KEY")
+				</code></pre>
+				</section>
+
+				<section>
+				<pre class="language-python"><code data-trim data-line-numbers="6,9">
+# Adapted from Quick Start
+
+from google import genai
+
+client = genai.Client(api_key="YOUR_API_KEY")
+response = client.models.generate_content(
+    model="gemini-2.0-flash", contents="Explain how AI works"
+)
+print(response.text)
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Demo</h2>
+					<p>
+					Show second.py
+					</p>
+				</section>
+
+			</section>
+
 
 				<section>
 				<h2>Multimodal</h2>
@@ -347,7 +412,7 @@ console.log(result.response.text());
 				<li class="fragment">Note - Gemini understands 'non-speech' parts (ie, sounds)</li>
 				<li class="fragment">Video: MP4, MPEG, MOV, AVI, X-FLV, MPG, WEBM, WMV, 3GPP</li>
 				<li class="fragment">Note - for video, image frames are extracted (1 per second)</li>
-				<li class="fragment">Docs: PDF, TXT, Markdown, CSV</li>
+				<li class="fragment">Docs: PDF, TXT, Markdown, CSV (<a href="https://ai.google.dev/gemini-api/docs/document-processing?lang=python#technical-details" target="_blank">more</a>)</li>
 				<!--
 				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
 				-->
@@ -368,7 +433,7 @@ For code, show image1.js
 				<section>
 					<h2>Code Demo - MM</h2>
 					<p>
-					Show image1.mjs, and possibly image2.mjs and the fun one.
+					Show image1, and possibly image2 and the fun one (time dependent)
 					</p>
 					<aside class="notes">
 For code, show image1.js
@@ -403,13 +468,29 @@ For code, show image1.js
 				</section>
 
 				<section>
+				<h2>Node</h2>
 				<pre><code class="language-javascript">
-// From the docs: https://ai.google.dev/gemini-api/docs/system-instructions
-const generativeModel = genAI.getGenerativeModel({
-  model: "gemini-1.5-pro-latest",
-  systemInstruction: "You are a cat. Your name is Neko."
+// https://ai.google.dev/gemini-api/docs/text-generation?lang=node#system-instructions
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+  systemInstruction: "You are a cat. Your name is Neko.",
 });
-				</code></pre>
+</code></pre>
+				</section>
+
+				<section>
+				<h2>Python</h2>
+				<pre><code class="language-python">
+# https://ai.google.dev/gemini-api/docs/text-generation?lang=python#system-instructions
+sys_instruct="You are a cat. Your name is Neko."
+client = genai.Client(api_key="GEMINI_API_KEY")
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    config=types.GenerateContentConfig(
+        system_instruction=sys_instruct),
+    contents=["your prompt here"]
+)				</code></pre>
 				</section>
 
 				<section>
@@ -439,6 +520,7 @@ const generativeModel = genAI.getGenerativeModel({
 				</section>
 
 				<section>
+				<h2>Node</h2>
 				<pre><code class="language-javascript">
 const generationConfig = {
 	temperature: 0.9,
@@ -456,9 +538,24 @@ await model.generateContent({
 				</section>
 
 				<section>
+				<h2>Python</h2>
+				<pre><code class="language-python">
+response = client.models.generate_content(
+  model='gemini-2.0-flash',
+  contents='Tell me a story in 100 words.',
+  config=types.GenerateContentConfig(
+      system_instruction='you are a story teller for kids under 5 years old',
+      response_mime_type= 'application/json'
+   ),
+)
+
+				</code></pre>
+				</section>
+
+				<section>
 					<h2>Demo</h2>
 					<p>
-					Show json_response.js + json_response2.js
+					Show json_response
 					</p>
 					<aside class="notes">
 					File is json_response.js, just text 
@@ -470,21 +567,68 @@ await model.generateContent({
 				<section>
 				<h2>Shaping Responses - 3</h2>
 				<ul>
-				<li class="fragment">JSON Schema</li>
 				<li class="fragment">Let's you specify *exactly* what you want</li>
-				<li class="fragment">Learning JSON Schema: <a href="https://json-schema.org/" target="_blank">json-schema.org</a></li>
+				<li class="fragment">Subset of OpenAPI 3.0 Schema object</li>
+				<li class="fragment">Used to be JSON Schema</li>
 				</ul>
 				</section>
 
 				<section>
 					<h2>Demo</h2>
 					<p>
-					Show json_response3.js 
+					Show json_response3 
 					</p>
 					<aside class="notes">
 					File is json_response.js, just text 
 					"What are the top reasons cats are good pets?"
 					then show the second one
+					</aside>
+				</section>
+
+				<section>
+					<h2>Image Generation</h2>
+					<ul>
+					<li class="fragment">Super, super new (like 2-3 weeks ago)</li>
+					<li class="fragment">Two model options - Gemini Flash 2.0 Experimental and Imagen</li>
+					<li class="fragment">Supports generating new images and editing existing images</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Image Generation - Gemini vs Imagen</h2>
+					<ul>
+					<li class="fragment">Gemini best for text *and* images</li>
+					<li class="fragment">Imagen has higher quality and more control over size</li>
+					<li class="fragment">Gemini is free 😀</li>
+					<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/image-generation#choose-a-model" target="_blank">More Info</a></li>
+					</ul>
+				</section>
+
+
+				<section>
+				<h2>Python</h2>
+				<pre><code class="language-python">
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+response = client.models.generate_content(
+	model="models/gemini-2.0-flash-exp",
+	contents="a bunch of kittens playing in the grass",
+	config=types.GenerateContentConfig(response_modalities=['Text', 'Image'])
+)
+				</code></pre>
+				</section>
+
+				<section>
+				<img src="img/kittens.png">
+				</section>
+
+
+				<section>
+					<h2>Demo</h2>
+					<p>
+					Show make_image
+					</p>
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -548,6 +692,7 @@ await model.generateContent({
 				</section>
 
 				<!-- Chrome Nano section -->
+				<!--
 				<section>
 					<img src="img/more.jpg">
 				</section>
@@ -657,11 +802,13 @@ let result = await session.prompt("why are cats so... cat?");
 					simple_prompt.html, simple_summary.html
 					</p>
 				</section>
+				-->
 
 				<section>
 					<h2>Questions?</h2>
 					<img alt="questions?" src="img/cat_qa.png">
 				</section>
+
 
 			</div>
 		</div>
