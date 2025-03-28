@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	textarea {
+		width: 500px;
+		height: 200px;
+	}
+	</style>
+</head>
+<body>
+
+<p>
+	<textarea id="input"></textarea>
+	<button disabled id="translateBtn">Translate</button>
+</p>
+<div id="result"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', init, false);
+
+let $input, $translateBtn, $result;
+let translator;
+
+async function init() {
+	
+	$result = document.querySelector('#result');
+	$translateBtn = document.querySelector('#translateBtn');
+	$input = document.querySelector('#input');
+	
+	if('ai' in window && 'translator' in window.ai) {
+			// You can haz translation
+			console.log('yeah buddy');
+			let translatorCapabilities = await window.ai.translator.capabilities();
+			let en_to_zh = translatorCapabilities.languagePairAvailable('en', 'zh');
+			console.log('English to Mandarin? ', en_to_zh);
+
+			translator = await self.ai.translator.create({
+				sourceLanguage: 'en',
+				targetLanguage: 'zh',
+				monitor(m) {
+					m.addEventListener('downloadprogress', (e) => {
+						console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
+						// in theory, flip the button disabled and add event listener
+					});
+				},
+			});
+		
+			if(en_to_zh === 'readily') {
+					$translateBtn.disabled=false;
+					$translateBtn.addEventListener('click', translate, false);
+			}		
+		} else {
+			console.log('nope');
+			$result.innerHTML = '<p>Sorry, you can\'t use this API.';
+		}
+}
+
+async function translate() {
+	let input = $input.value.trim();
+	if(input === '') return;
+	console.log('Translating', input);
+	let result = await translator.translate(input);
+	console.log(result);
+	$result.innerHTML = result;
+}
+</script>
+
+</body>
+</html>

@@ -4,6 +4,8 @@ import os
 import sys
 from slugify import slugify
 
+os.makedirs("./output", exist_ok=True)
+
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 if len(sys.argv) < 2:
