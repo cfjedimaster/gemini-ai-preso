@@ -1,35 +1,20 @@
+import { GoogleGenAI } from "@google/genai";
 
-const {
-  GoogleGenerativeAI,
-} = require("@google/generative-ai");
-
-const MODEL_NAME = "gemini-1.5-pro-latest";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 async function processPrompt(prompt, mimetype="text/plain") {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
-  const generationConfig = {
-    temperature: 1,
-    topK: 0,
-    topP: 0.95,
-    maxOutputTokens: 8192,
-    response_mime_type:mimetype
-
-  };
-
- 
-  const parts = [
-    {text: prompt},
-  ];
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
-    generationConfig
+  const response = await ai.models.generateContent({
+    model: MODEL_NAME,
+    contents: prompt,
+    config: {
+      responseMimeType:mimetype
+      },
   });
 
-  return result.response.text();
+  return response.text;
 }
 
 if(process.argv.length < 3) {

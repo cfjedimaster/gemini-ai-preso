@@ -1,31 +1,29 @@
-const readline = require('readline');
-const { styleText } = require('node:util');
 
-const {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} = require("@google/generative-ai");
+import readline from 'readline';
+import { styleText } from 'node:util';
+import { GoogleGenAI } from "@google/genai";
 
-const MODEL_NAME = "gemini-1.5-pro-latest";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.GEMINI_API_KEY;
 
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 let chat = null;
 
 async function callGemini(text) {
 
 	if(!chat) {
-		chat = model.startChat({
-			history:[]
+
+		chat = ai.chats.create({
+			model: MODEL_NAME,
+			history: [
+			],
 		});
+		
+
 	}
 
-	const result = await chat.sendMessage(text);
-	//console.log(JSON.stringify(result, null, '\t'));
-	return result.response.text();
-	
+	const result = await chat.sendMessage({message:text});
+	return result.text;
 }
 
 // Credit: https://stackoverflow.com/a/50890409/52160

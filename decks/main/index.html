@@ -283,9 +283,12 @@ comment out .text(), show full json instead
 				<section>
 				<h2>Node SDK</h2>
 				<ul>
-				<li class="fragment"><code>npm install @google/generative-ai</code></li>
+				<li class="fragment"><code>npm install @google/genai</code></li>
+				<!--
 				<li class="fragment">Repo: <a href="https://github.com/google-gemini/generative-ai-js" target="_blank">github.com/google-gemini/generative-ai-js</a></li>
 				<li class="fragment">Better docs: <a href="https://github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/generative-ai.md" target="_blank">github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/generative-ai.md</a></li>
+				-->
+				<li class="fragment">Repo Docs: <a href="https://googleapis.github.io/js-genai/" target="_new">googleapis.github.io/js-genai/</a></li>
 				</ul>
 				<aside class="notes">
 				You can find docs there but you have to dig a bit
@@ -295,40 +298,18 @@ comment out .text(), show full json instead
 				<section>
 				<pre class="language-js"><code data-trim data-line-numbers="">
 // Adapted from Quick Start
-// Load SDK and initialize with key
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenAI } from "@google/genai";
 
-const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const ai = new GoogleGenAI({ apiKey: "YOUR_API_KEY" });
+const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: "Explain how AI works in a few words",
+  });
+console.log(response.text);
+
 				</code></pre>
 				</section>
 
-				<section>
-				<pre class="language-js"><code data-trim data-line-numbers="6,7">
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-//specify a prompt
-const prompt = "Explain cats";
-				</code></pre>
-				</section>
-
-				<section>
-				<pre class="language-js"><code data-trim data-line-numbers="8-10">
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-const prompt = "Explain cats";
-
-// pass prompt and dump result
-const result = await model.generateContent(prompt);
-console.log(result.response.text());
-				</code></pre>
-				</section>
 
 				<section>
 					<h2>Demo</h2>
@@ -433,7 +414,7 @@ For code, show image1.js
 				<section>
 					<h2>Code Demo - MM</h2>
 					<p>
-					Show image1, and possibly image2 and the fun one (time dependent)
+					Show image1, pdf, and possibly image2 and the fun one (time dependent)
 					</p>
 					<aside class="notes">
 For code, show image1.js
@@ -471,10 +452,13 @@ For code, show image1.js
 				<h2>Node</h2>
 				<pre><code class="language-javascript">
 // https://ai.google.dev/gemini-api/docs/text-generation?lang=node#system-instructions
-const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  systemInstruction: "You are a cat. Your name is Neko.",
-});
+const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: "Hello there",
+    config: {
+      systemInstruction: "You are a cat. Your name is Neko.",
+    },
+  });
 </code></pre>
 				</section>
 
@@ -521,18 +505,13 @@ response = client.models.generate_content(
 
 				<section>
 				<h2>Node</h2>
-				<pre><code class="language-javascript">
-const generationConfig = {
-	temperature: 0.9,
-	topK: 1,
-	topP: 1,
-	maxOutputTokens: 2048,
-	response_mime_type:'application/json'
-};
-
-await model.generateContent({
-	contents: [ { role: "user", [ {text:"prompt"} ] } ], 
-	generationConfig
+				<pre><code class="language-javascript" data-trim>
+const response = await ai.models.generateContent({
+model: 'gemini-2.0-flash',
+contents: prompt,
+config: {
+	responseMimeType:'application/json'
+	},
 });
 				</code></pre>
 				</section>
@@ -565,7 +544,7 @@ response = client.models.generate_content(
 				</section>
 
 				<section>
-				<h2>Shaping Responses - 3</h2>
+				<h2>Shaping Responses - 2</h2>
 				<ul>
 				<li class="fragment">Let's you specify *exactly* what you want</li>
 				<li class="fragment">Subset of OpenAPI 3.0 Schema object</li>

@@ -1,5 +1,7 @@
 {
+  "type":"module",
   "dependencies": {
+    "@google/genai": "^0.7.0",
     "@google/generative-ai": "^0.21.0",
     "@sindresorhus/slugify": "^2.2.1"
   }

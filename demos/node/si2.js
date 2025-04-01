@@ -1,22 +1,24 @@
-const {
-  GoogleGenerativeAI
-} = require("@google/generative-ai");
+import { GoogleGenAI } from "@google/genai";
 
-const MODEL_NAME = "gemini-1.5-pro-latest";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.GEMINI_API_KEY;
 
+const ai = new GoogleGenAI({ apiKey: API_KEY });
+
 async function processPrompt(prompt) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ 
-  	model: MODEL_NAME,
-	systemInstruction: `
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: prompt,
+    config: {
+      systemInstruction: `
 You are a bot focused on astronomy topics, and only astronomy. Tailor your answers for children in elementary school. Refuse to answer questions outside of the topic. 
 `
+          },
   });
 
-  const result = await model.generateContent(prompt);
 
-  return result.response.text();
+  return response.text;
 }
 
 if(process.argv.length < 3) {

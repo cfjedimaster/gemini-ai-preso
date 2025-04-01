@@ -1,35 +1,31 @@
+import {
+  GoogleGenAI,
+  createUserContent,
+  createPartFromUri,
+} from "@google/genai";
 
-import { GoogleAIFileManager } from "@google/generative-ai/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from 'fs';
 import slugify from '@sindresorhus/slugify';
 
-const MODEL_NAME = "gemini-1.5-pro";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 async function processImage(img) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-  const fileManager = new GoogleAIFileManager(API_KEY);
+  const image = await ai.files.upload({
+	file: img,
+  });
 
-  const uploadResult = await fileManager.uploadFile(img,
-	{
-	  mimeType: "image/*"
-	},
-  );
-
-
-  const result = await model.generateContent([
-	'Describe what you see in this image in one sentence only.', 
-	{
-	  fileData: {
-		fileUri: uploadResult.file.uri, 
-		mimeType: uploadResult.file.mimeType
-	  }
-	}
-  ]);
-
-  return result.response.text();
+  const result = await ai.models.generateContent({
+	model:MODEL_NAME,
+	contents:
+	  createUserContent([
+		'Describe what you see in this image in one sentence only.', 
+		createPartFromUri(image.uri, image.mimeType)
+	  ])
+  })
+  
+  return result.text;
 }
 
 (async () => {

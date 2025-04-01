@@ -1,4 +1,4 @@
-#!/home/ray/projects/gemini-ai-preso/demos/python/.venv/bin/python3.11
+#!/home/ray/projects/gemini-ai-preso/demos/python/.venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys

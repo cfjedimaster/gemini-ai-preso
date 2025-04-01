@@ -1,54 +1,43 @@
 
-const {
-  GoogleGenerativeAI
-} = require("@google/generative-ai");
+import { GoogleGenAI, Type } from "@google/genai";
 
-const MODEL_NAME = "gemini-1.5-pro-latest";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
-async function processPrompt(prompt, mimetype="text/plain") {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+async function processPrompt(prompt) {
 
-	const schema = {
-		"description": "A scientific answer with resources",
-		"type": "object",
-		"properties": {
-			"answer": {
-				"type":"string"
-			},
-			"sources":{
-				"type":"array",
-				"items": {
-					"type":"string"
-				}
-			}
-		}
-	};
-
-  const generationConfig = {
-    temperature: 1,
-    topK: 0,
-    topP: 0.95,
-    maxOutputTokens: 8192,
-    response_mime_type:mimetype,
-    responseSchema: schema
-  };
-
-  const parts = [
-    {text: `
-    For the prompt given below, return both answers and links to resources.
-    
-    Prompt: ${prompt}
-    `}];
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
-    generationConfig,
+  const response = await ai.models.generateContent({
+    model: 'gemini-2.0-flash',
+    contents: prompt,
+    config: {
+      responseMimeType: 'application/json',
+      responseSchema: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
+          properties: {
+            'answer':{
+              type: Type.STRING,
+              description: 'Answer to the question',
+              nullable: false,
+            },
+            'sources': {
+              type: Type.ARRAY,
+              items: {
+                type: Type.STRING,                
+                description: 'A link to the resource',
+              },
+              nullable: false,
+            },
+          },
+          required: ['answer'],
+        },
+      },
+    },
   });
 
-  const response = result.response;
-  return response.text();
+  return response.text;
 }
 
 if(process.argv.length < 3) {
@@ -61,7 +50,7 @@ if(process.argv.length < 3) {
   let prompt = process.argv[2];
   
   console.log(`Generating JSON response for prompt: ${prompt}`);
-  result = await processPrompt(prompt,'application/json');
+  let result = await processPrompt(prompt);
   console.log(result);
   
 })();
