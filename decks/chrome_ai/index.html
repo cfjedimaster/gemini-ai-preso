@@ -88,6 +88,14 @@
 				</section>
 
 				<section>
+				<img src="img/email1.png">
+				</section>
+
+				<section>
+				<img src="img/email2.png">
+				</section>
+
+				<section>
 				<h2>Enabling</h2>
 				<ul>
 				<li class="fragment">Join the Program: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZXeiwj9KO9jMctffHPym88ln12xNWCrVkMY_u06WfSTulQg/viewform" target="_blank">Form</a></li>
@@ -148,7 +156,7 @@
 				<section>
 				<h2>Using the Translator API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers>
-if('ai' in window && 'translator' in window.ai) {
+if('Translator' in window) {
 	// You can haz translation
 }
 				</code></pre>
@@ -157,13 +165,16 @@ if('ai' in window && 'translator' in window.ai) {
 
 				<section>
 				<h2>Using the Translator API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="3-6">
-if('ai' in window && 'translator' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="3-9">
+if('Translator' in window) {
 	// You can haz translation
 	// but can you go from X to Y?
-	let translatorCapabilities = await window.ai.translator.capabilities();
- 	let en_to_zh = translatorCapabilities.languagePairAvailable('en', 'zh');
-	console.log('English to Mandarin? ', en_to_zh);
+	let translatorCapabilities = await window.Translator.availability({
+		sourceLanguage: 'en',
+		targetLanguage: 'zh'
+	});
+
+	console.log('English to Mandarin? ', translatorCapabilities);
 }
 				</code></pre>
 				</section>
@@ -171,24 +182,26 @@ if('ai' in window && 'translator' in window.ai) {
 				<section>
 				<h2>About the Capabilities Checks </h2>
 				<ul>
-				<li class="fragment">no</li>
-				<li class="fragment">readily <span class="fragment" style="color: red; font-style:italic">Yes, seriously, not 'ready', but 'readily', and wow do I have feelings about this</span></li>
-				<li class="fragment">after-download</li>
+				<li class="fragment">unavailable</li>
+				<li class="fragment">available</li>
+				<li class="fragment">downloadable</li>
 				</ul>
 				</section>
 
 				<section>
 				<h2>Using the Translator API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="5-8">
-if('ai' in window && 'translator' in window.ai) {
-	let translatorCapabilities = await window.ai.translator.capabilities();
- 	let en_to_zh = translatorCapabilities.languagePairAvailable('en', 'zh');
+				<pre><code class="javascript" data-trim data-line-numbers="">
+const translator = await window.Translator.create({
+	sourceLanguage: 'en',
+	targetLanguage: 'zh',
+	monitor(m) {
+		m.addEventListener('downloadprogress', (e) => {
+			console.log(`Downloaded ${e.loaded} of ${e.total} percent.`);
+			// in theory, flip the button disabled and add event listener
+		});
+	},
+});
 
-	const translator = await self.ai.translator.create({
-		sourceLanguage: 'en',
-		targetLanguage: 'zh'
-	});
-}
 				</code></pre>
 				</section>
 
@@ -196,19 +209,12 @@ if('ai' in window && 'translator' in window.ai) {
 				<section>
 				<h2>Using the Translator API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers="10-12">
-if('ai' in window && 'translator' in window.ai) {
-	let translatorCapabilities = await window.ai.translator.capabilities();
- 	let en_to_zh = translatorCapabilities.languagePairAvailable('en', 'zh');
+const translator = await window.Translator.create({
+	sourceLanguage: 'en',
+	targetLanguage: 'zh'
+});
 
-	const translator = await window.ai.translator.create({
-		sourceLanguage: 'en',
-		targetLanguage: 'zh'
-	});
-
-	let newString = await translator.translate(`
-What time does the four oclock bus come?
-	`);
-}
+let newString = await translator.translate('What time does the four oclock bus come?');
 				</code></pre>
 				</section>
 
@@ -251,21 +257,19 @@ What time does the four oclock bus come?
 				<section>
 				<h2>Using the Language Detector API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers>
-if('ai' in window && 'languageDetector' in window.ai) {
+if('LanguageDetector' in window) {
 	// You can haz detection
 }
 				</code></pre>
 				</section>
 
-
 				<section>
 				<h2>Using the Language Detector API - V1</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="3-6">
-if('ai' in window && 'languageDetector' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="3-5">
+if('LanguageDetector' in window) {
 	// You can haz detection
 	// but can you detect anything? 
-	let languageDetectorCapabilities = await window.ai.languageDetector.capabilities();
- 	let canDetect = languageDetectorCapabilities.available;
+	let canDetect = await window.LanguageDetector.availability();
 	console.log('Detect stuff? ', canDetect);
 }
 				</code></pre>
@@ -273,49 +277,44 @@ if('ai' in window && 'languageDetector' in window.ai) {
 
 				<section>
 				<h2>Using the Language Detector API - V2</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="3-6">
-if('ai' in window && 'languageDetector' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="3-7">
+if('LanguageDetector' in window) {
 	// You can haz detection
-	// but can you detect X? 
-	let languageDetectorCapabilities = await window.ai.languageDetector.capabilities();
- 	let can_es = languageDetectorCapabilities.languageAvailable('es');
-	console.log('Detect Spanish? ', can_es);
+	// but can you detect anything? 
+	let canDetect = await window.LanguageDetector.availability({ 
+		expectedInputLanguages: ["en", "zh"]
+	})
+	console.log('Detect stuff? ', canDetect);
 }
 				</code></pre>
 				</section>
 
-
 				<section>
 				<h2>Using the Language Detector API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="8-10">
-if('ai' in window && 'languageDetector' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="6-9">
+if('LanguageDetector' in window) {
 	// You can haz detection
 	// but can you detect anything? 
-	let languageDetectorCapabilities = await window.ai.languageDetector.capabilities();
- 	let canDetect = languageDetectorCapabilities.available;
+	let canDetect = await window.LanguageDetector.availability();
 	console.log('Detect stuff? ', canDetect);
-
-	if(canDetect === 'readily') {
-		detector = await window.ai.languageDetector.create();
+	if(canDetect === 'available') {
+		detector = await window.LanguageDetector.create();
 	}
 }
-
 				</code></pre>
 				</section>
 
 
 				<section>
 				<h2>Using the Language Detector API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="10">
-if('ai' in window && 'languageDetector' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="8">
+if('LanguageDetector' in window) {
 	// You can haz detection
 	// but can you detect anything? 
-	let languageDetectorCapabilities = await window.ai.languageDetector.capabilities();
- 	let canDetect = languageDetectorCapabilities.available;
+	let canDetect = await window.LanguageDetector.availability();
 	console.log('Detect stuff? ', canDetect);
-
-	if(canDetect === 'readily') {
-		detector = await window.ai.languageDetector.create();
+	if(canDetect === 'available') {
+		detector = await window.LanguageDetector.create();
 		let detectedLanguage = await detector.detect(input);
 	}
 }
@@ -373,7 +372,10 @@ assemble, and to petition the Government for a redress of grievances.
 
 				<section>
 				<pre><code class="html" data-trim>
-Le Congrès n'adoptera aucune loi concernant l'établissement de la religion, ou leur interdisant le libre exercice ; ou écarter la liberté d'expression, ou de la presse ; ou le droit du peuple de se rassembler paisiblement et de demander au gouvernement une réparation des griefs.
+Le Congrès n'adoptera aucune loi concernant l'établissement de la religion, 
+ou leur interdisant le libre exercice ; ou écarter la liberté d'expression, 
+ou de la presse ; ou le droit du peuple de se rassembler paisiblement et 
+de demander au gouvernement une réparation des griefs.
 				</code></pre>
 				</section>
 
@@ -417,7 +419,7 @@ Le Congrès n'adoptera aucune loi concernant l'établissement de la religion, ou
 				<section>
 				<h2>Using the Summarizer API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers>
-if('ai' in window && 'summarizer' in window.ai) {
+if('Summarizer' in window.ai) {
 	// You can haz summary
 }
 				</code></pre>
@@ -428,10 +430,10 @@ if('ai' in window && 'summarizer' in window.ai) {
 				<h2>Using the Summary API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers="">
 // most of this from Chrome doc as it was excellent				
-if('ai' in window && 'summarizer' in window.ai) {
+if('Summarizer' in window.ai) {
 	// You can haz summary
 
-	let available = (await window.ai.summarizer.capabilities()).available;
+	let available = (await window.Summarizer.availability());
 
 	let summarizer;
 	if (available === 'no') {
@@ -439,13 +441,15 @@ if('ai' in window && 'summarizer' in window.ai) {
 		return;
 	}
 
-	if (available === 'readily') {
+	if (available === 'available') {
 		summarizer = await window.ai.summarizer.create();
 	} else {
-		// The Summarizer API can be used after the model is downloaded.
-		summarizer = await window.ai.summarizer.create();
-		summarizer.addEventListener('downloadprogress', (e) => {
-			console.log(e.loaded, e.total);
+		summarizer = await window.Summarizer.create({
+			monitor(m) {
+				m.addEventListener("downloadprogress", e => {
+					console.log(`Downloaded ${e.loaded * 100}%`);
+				});
+			}
 		});
 		await summarizer.ready;
 	}
@@ -456,12 +460,12 @@ if('ai' in window && 'summarizer' in window.ai) {
 
 				<section>
 				<h2>Using the Summary API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="24">
+				<pre><code class="javascript" data-trim data-line-numbers="26">
 // most of this from Chrome doc as it was excellent				
-if('ai' in window && 'summarizer' in window.ai) {
+if('Summarizer' in window.ai) {
 	// You can haz summary
 
-	let available = (await window.ai.summarizer.capabilities()).available;
+	let available = (await window.Summarizer.availability());
 
 	let summarizer;
 	if (available === 'no') {
@@ -469,13 +473,15 @@ if('ai' in window && 'summarizer' in window.ai) {
 		return;
 	}
 
-	if (available === 'readily') {
+	if (available === 'available') {
 		summarizer = await window.ai.summarizer.create();
 	} else {
-		// The Summarizer API can be used after the model is downloaded.
-		summarizer = await window.ai.summarizer.create();
-		summarizer.addEventListener('downloadprogress', (e) => {
-			console.log(e.loaded, e.total);
+		summarizer = await window.Summarizer.create({
+			monitor(m) {
+				m.addEventListener("downloadprogress", e => {
+					console.log(`Downloaded ${e.loaded * 100}%`);
+				});
+			}
 		});
 		await summarizer.ready;
 	}
@@ -495,7 +501,7 @@ if('ai' in window && 'summarizer' in window.ai) {
 <script async src="https://public.codepenassets.com/embed/index.js"></script>
 
 				<p class="fragment">
-				<a href="https://codepen.io/cfjedimaster/pen/zxYrqwP" target="_blank">Option Demo</a>
+				<a href="https://codepen.io/cfjedimaster/pen/jEOXymr?editors=1010" target="_blank">Option Demo</a>
 				</p>
 				</section>
 
@@ -514,6 +520,34 @@ if('ai' in window && 'summarizer' in window.ai) {
 				<li class="fragment">Doesn't quite work right (their words, not mine)</li>
 				<li class="fragment"><a href="https://codepen.io/cfjedimaster/pen/zxYJGvd?editors=1011" target="_blank">Demo</a></li>
 				</ul>
+				</section>
+
+				<section>
+				<h2>The Prompt API</h2>
+				<ul>
+				<li class="fragment">General purpose prompting API</li>
+				<li class="fragment">Incredibly flexible (system instructions, structured output, session persistence/cloning)</li>
+				<li class="fragment">In EPP</li>
+				<li class="fragment">For now, skipping code in slides, just demos</li>
+				</ul>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="MYWZopJ" data-pen-title="Writer March 2025" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/MYWZopJ">
+  Writer March 2025</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="gbOZGao" data-pen-title="LanguageModel + Weather" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/gbOZGao">
+  LanguageModel + Weather</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
 				</section>
 
 				<section>
