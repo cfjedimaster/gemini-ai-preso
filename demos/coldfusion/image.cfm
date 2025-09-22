@@ -1,6 +1,8 @@
 <cfinclude template="utils.cfm">
 
 <cfscript>
+model_id = "gemini-2.5-flash";
+
 /*
 I figured this out looking at the Shell tab here, https://ai.google.dev/api/files#File
 */
@@ -61,7 +63,7 @@ function promptWithFile(prompt, file) {
 		}
 	};
 
-	cfhttp(url="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=#application.GEMINI_API_KEY#", method="post", result="result") {
+	cfhttp(url="https://generativelanguage.googleapis.com/v1beta/models/#model_id#:generateContent?key=#application.GEMINI_API_KEY#", method="post", result="result") {
 		cfhttpparam(type="header", name="Content-Type", value="application/json");
 		cfhttpparam(type="body", value="#serializeJSON(body)#");
 	}

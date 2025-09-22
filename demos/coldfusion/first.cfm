@@ -4,28 +4,30 @@
 Remember to say you used the Curl code
 --->
 <cfscript>
+model_id = "gemini-2.5-flash";
+//generate_content_api="streamGenerateContent";
+generate_content_api="generateContent";
+
 body = {
-  "contents": [
-    {
-      "role": "user",
-      "parts": [
-        {
-          "text": "Why is the sky blue, and how are cats involved in that process?"
-        }
-      ]
-    }
-  ],
-  "generationConfig": {
-    "temperature": 1,
-    "topK": 64,
-    "topP": 0.95,
-    "maxOutputTokens": 8192,
-    "responseMimeType": "text/plain"
-  }
-};
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "why are cats so much better than dogs?"
+          },
+        ]
+      },
+    ],
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 0,
+      },
+    },
+}
 </cfscript>
 
-<cfhttp url="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=#application.GEMINI_API_KEY#"
+<cfhttp url="https://generativelanguage.googleapis.com/v1beta/models/#model_id#:#generate_content_api#?key=#application.GEMINI_API_KEY#"
 		method="post"
 		result="result"
 		>

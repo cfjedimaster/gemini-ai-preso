@@ -1,6 +1,8 @@
 <cfinclude template="utils.cfm">
 
 <cfscript>
+model_id = "gemini-2.5-flash";
+
 /*
 I figured this out looking at the Shell tab here, https://ai.google.dev/api/files#File
 */
@@ -61,7 +63,7 @@ function promptWithFile(prompt, file) {
 		}
 	};
 
-	cfhttp(url="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=#application.GEMINI_API_KEY#", method="post", result="result") {
+	cfhttp(url="https://generativelanguage.googleapis.com/v1beta/models/#model_id#:generateContent?key=#application.GEMINI_API_KEY#", method="post", result="result") {
 		cfhttpparam(type="header", name="Content-Type", value="application/json");
 		cfhttpparam(type="body", value="#serializeJSON(body)#");
 	}
@@ -75,7 +77,7 @@ for(i=1;i<=sourceImages.len();i++) {
 	fileOb = uploadFile(sourceImages[i]);
 	//writedump(fileOb);
 
-	result = promptWithFile("what is this a picture of?", fileOb);
+	result = promptWithFile("what is this a picture of? describe in ONE SENTENCE only and try to keep it to less than 8 words", fileOb);
 	writeDump(var=result,expand=false);
 
 	imageBits = fileReadBinary(sourceImages[i]);

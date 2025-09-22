@@ -9,6 +9,7 @@ component {
 		// credit: https://www.bennadel.com/blog/2838-reading-environment-variables-in-coldfusion.htm
 		var system = createObject( "java", "java.lang.System" );
 		application.GEMINI_API_KEY = system.getenv(javaCast("string", "GEMINI_API_KEY"));
+		application.NANO_API_KEY = system.getenv(javaCast("string", "NANO_API_KEY"));
 		return true;
 	}
 }

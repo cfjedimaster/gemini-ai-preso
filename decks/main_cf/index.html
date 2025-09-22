@@ -26,7 +26,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section data-background="img/matrix.jpg" data-background-opacity="0.3">
-				<h1>Integrating Generative AI</h1><h2>in your CF Application</h2>
+				<h1>Harnessing AI Superpowers in ColdFusion</h2>
 				</section>
 
 				<section>
@@ -35,7 +35,7 @@
 					<h2>Me</h2>
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
-					<li>Senior Developer Evangelist for Adobe</li>
+					<li>Hire me!</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>Former ColdFusion Jedi</li>
@@ -60,12 +60,9 @@
 				<h2>What You Know, What I Know</h2>
 				<ul>
 				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
-				<li class="fragment">ColdFusion (see previous warning)</li>
-				<li class="fragment">Noob on Stage (me, not you)</li>
+				<li class="fragment">ColdFusion</li>
 				</li>
 				<aside class="notes">
-				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
-				Also, I know enough to be dangerous! Woot!
 				</aside>
 				</section>
 
@@ -83,6 +80,9 @@
 				</p>
 				</section>
 
+				<section>
+				<h2>Google Gemini</h2>
+				</section>
 
 				<section>
 				<h2>Google Gemini</h2>
@@ -118,13 +118,15 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<section>
 				<h2>Models</h2>
 				<ul>
-				<li class="fragment">Gemini 1.5 Pro</li>
-				<li class="fragment">Gemini 1.5 Flash (quicker, not as good, but quicker)</li>
+				<li class="fragment">Gemini 2.5 Pro</li>
+				<li class="fragment">Gemini 2.5 Flash (quicker, not as deep)</li>
+				<li class="fragment">Gemini 2.5 Flash-Lite</li>
 				<li class="fragment">Changing... like often</li>
-				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_new">More at docs</a></li>
+				<li class="fragment"><a href="https://ai.google.dev/gemini-api/docs/models" target="_new">More at docs</a></li>
 				</ul>
 				</section>
 
+				<!--
 				<section>
 				<h2>1.5 Pro</h2>
 				<ul>
@@ -136,6 +138,7 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<li class="fragment">60K lines of code (approx)</li>
 				</ul>
 				</section>
+				-->
 
 				<section>
 				<h2>Code</h2>
@@ -144,7 +147,6 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				<li class="fragment">Python</li>
 				<li class="fragment">Node</li>
 				<li class="fragment">Go</li>
-				<li class="fragment">Web 🤔</li>
 				<li class="fragment">Dart</li>
 				<li class="fragment">Flutter</li>
 				<li class="fragment">Android</li>
@@ -161,28 +163,34 @@ I'm going to ignore Vertex until the end of the preso because it's just going to
 				</section>
 
 				<section>
-				<img src="img/getkey1.png">
+				<img src="img/getkey1_2025.png">
 				</section>
 
 				<section>
-				<img src="img/getkey2.png">
+				<img src="img/getkey2_2025.png">
 				</section>
 
 				<section>
-				<img src="img/getkey3.png">
-				</section>
-
-				<section>
-				<img src="img/getkey4.png">
+				<img src="img/getkey3_2025.png">
 				</section>
 
 				<section>
 				<pre><code>
-curl \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" \
   -H 'Content-Type: application/json' \
-  -d '{"contents":[{"parts":[{"text":"Write a story about a magic backpack"}]}]}' \
-  -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY'
-				</code></pre>
+  -H 'X-goog-api-key: GEMINI_API_KEY' \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": "Explain how AI works in a few words"
+          }
+        ]
+      }
+    ]
+  }'				</code></pre>
 				<p>
 				Show demos/curh.sh
 				</p>
@@ -290,7 +298,7 @@ show second.js and third
 				<li class="fragment">Note - Gemini understands 'non-speech' parts (ie, sounds)</li>
 				<li class="fragment">Video: MP4, MPEG, MOV, AVI, X-FLV, MPG, WEBM, WMV, 3GPP</li>
 				<li class="fragment">Note - for video, image frames are extracted (1 per second)</li>
-				<li class="fragment">Docs: PDF, TXT, Markdown, CSV</li>
+				<li class="fragment">Docs: <strong><u>PDF</u></strong>, TXT, Markdown, CSV</li>
 				<!--
 				<li class="fragment">Details: <a href="https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats" target="_new">Supported file formats</a></li>
 				-->
@@ -310,7 +318,7 @@ Open Studio. Pick cat.
 				<section>
 					<h2>Code Demo - MM</h2>
 					<p>
-					Show image.cfm, and possibles images2.cfm and the fun one.
+					Show image.cfm, and possibly images2.cfm and the fun one.
 					</p>
 					<aside class="notes">
 For code, show image1.js
@@ -349,7 +357,6 @@ For code, show image1.js
 				<pre><code class="language-javascript">
 
 "systemInstruction": {
-    "role": "user",
     "parts": [
       {
         "text": "You are a cat. Your name is Neko."
@@ -467,6 +474,28 @@ For code, show image1.js
 					<li class="fragment">More info at <a href="https://cloud.google.com/vertex-ai" target="_new">https://cloud.google.com/vertex-ai</a></li>
 					<li class="fragment">Thank you <a href="https://prisoner.com/" target="_new">Allen Firstenberg</a></li>
 					</ul>
+				</section>
+
+				<section>
+				<h2>Gemini.cfc</h2>
+				<ul>
+				<li class="fragment">ColdFusion Component wrapper</li>
+				<li class="fragment">(A bit old...)</li>
+				<li class="fragment"><a href="https://github.com/cfjedimaster/gemini.cfc" target="_blank">github.com/cfjedimaster/gemini.cfc</a></li>
+				</ul>
+				</section>
+
+				<section>
+				<pre class="language-js"><code data-trim>
+gemini = new gemini(key="your key", model="gemini-1.5-pro");
+
+result = gemini.prompt('why is the sky blue?');
+
+// image example:
+fileOb = gemini.uploadFile(expandPath('./cat1.png'));
+
+result = gemini.prompt('what is in this picture?', [ fileOb ]);
+				</code></pre>
 				</section>
 
 				<section>

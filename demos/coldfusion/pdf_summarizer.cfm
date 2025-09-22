@@ -1,6 +1,7 @@
 <cfinclude template="utils.cfm">
 
 <cfscript>
+setting requesttimeout=900;
 model_id = "gemini-2.5-flash";
 
 /*
@@ -71,25 +72,34 @@ function promptWithFile(prompt, file) {
 	return deserializeJSON(result.fileContent);
 }
 
-sourceImages = directoryList(expandPath('../images'));
+sourcePDFs = directoryList(path=expandPath("../pdfs"),filter="*.pdf");
 
-for(i=1;i<=sourceImages.len();i++) {
-	fileOb = uploadFile(sourceImages[i]);
+for(i=1;i<=sourcePDFs.len();i++) {
 
-	result = promptWithFile("Look at this picture and roast it, describing just how bad it is.", fileOb);
-	//writeDump(var=result,expand=false);
+	// do we _need_ to analyze this?
+	possibleTextFile = sourcePDFs[i].replace(".pdf",".txt");
+	possibleSummary = fileExists(possibleTextFile);
 
-	imageBits = fileReadBinary(sourceImages[i]);
-	image64 = toBase64(imageBits);
-	writeoutput("<img src='data:image/jpeg;base64, #image64#'>");
+	writeoutput("<p><strong>Summary for #sourcePDFs[i]#</strong></p>");
 
-	try {
-		writeOutput(md2HTML(result.candidates[1].content.parts[1].text));
-	} catch(any e) {
-		writedump(var=e, expand=false);
-		writedump(var=result, expand=false);
-		/* The day I built this, Gemini was having "issues" - aren't we all? */
+	if(possibleSummary) {
+		summary = fileRead(possibleTextFile);
+		writeoutput(summary);
+	} else {
+		fileOb = uploadFile(sourcePDFs[i]);
+
+		result = promptWithFile("summarize the contents of this pdf", fileOb);
+
+		try {
+			summary = md2HTML(result.candidates[1].content.parts[1].text);
+			writeoutput(summary);
+			fileWrite(possibleTextFile, summary);
+		} catch(any e) {
+			/* The day I built this, Gemini was having "issues" - aren't we all? */
+		}
 	}
+
+	writeoutput("<hr>");
 }
 
 </cfscript>
