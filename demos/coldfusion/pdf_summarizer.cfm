@@ -88,7 +88,9 @@ for(i=1;i<=sourcePDFs.len();i++) {
 	} else {
 		fileOb = uploadFile(sourcePDFs[i]);
 
-		result = promptWithFile("summarize the contents of this pdf", fileOb);
+		result = promptWithFile("
+		Please act as an expert summarizer. Analyze the provided PDF document and create a concise and comprehensive summary of its key contents. Your summary should focus on the main arguments, conclusions, and any significant data or findings. It should be written in a clear, neutral tone and be easy for a non-expert to understand.
+		", fileOb);
 
 		try {
 			summary = md2HTML(result.candidates[1].content.parts[1].text);

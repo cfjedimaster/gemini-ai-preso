@@ -1,0 +1,42 @@
+<p>The &quot;D&amp;D Basic Rules, Version 1.0&quot; document, released in November 2018, serves as a foundational guide for new players and Dungeon Masters (DMs) to engage in the Dungeons &amp; Dragons tabletop roleplaying game. It outlines the essential mechanics and content for collaborative storytelling in fantasy worlds.</p>
+<p><strong>Key Contents and Mechanics:</strong></p>
+<ol>
+<li>
+<p><strong>Core Gameplay Loop:</strong> D&amp;D is presented as a game of imagination and structured storytelling. The DM narrates the environment, players describe their characters' actions, and the DM determines the outcomes, often using <strong>dice rolls</strong>. The primary mechanic involves rolling a <strong>20-sided die (d20)</strong>, adding relevant <strong>ability modifiers</strong> (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) and a <strong>proficiency bonus</strong>, then comparing the total to a <strong>Difficulty Class (DC)</strong> or <strong>Armor Class (AC)</strong> to determine success or failure. The concepts of <strong>Advantage and Disadvantage</strong> allow for rolling two d20s and taking the higher or lower result, respectively. The game also adheres to a &quot;Specific Beats General&quot; rule, where specific rules override general ones.</p>
+</li>
+<li>
+<p><strong>Character Creation:</strong> Players craft unique adventurers by following a step-by-step process:</p>
+<ul>
+<li><strong>Race:</strong> Choosing from common options like Dwarf, Elf, Halfling, and Human, each granting distinct traits and ability score increases.</li>
+<li><strong>Class:</strong> Selecting a vocation like Cleric, Fighter, Rogue, or Wizard, which defines primary abilities, proficiencies (armor, weapons, skills, saving throws, tools), and special features.</li>
+<li><strong>Ability Scores:</strong> Determining six core scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) and their derived modifiers, which are central to most dice rolls.</li>
+<li><strong>Personality and Background:</strong> Developing a character's alignment (lawful/neutral/chaotic, good/evil/neutral), personality traits, ideals, bonds, and flaws, along with a background (e.g., Acolyte, Criminal) that provides skills and equipment.</li>
+<li><strong>Equipment:</strong> Selecting starting gear and understanding wealth management (gold pieces, silver pieces, etc.).</li>
+<li>Character progression involves gaining <strong>experience points (XP)</strong> and <strong>levels</strong>, unlocking new capabilities and increasing proficiency bonuses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Playing the Game:</strong> Adventuring activities are broadly categorized into three &quot;pillars&quot;:</p>
+<ul>
+<li><strong>Exploration:</strong> Rules for movement (speed, difficult terrain, special movement types like climbing, swimming, jumping) and interacting with the environment (vision, light, hazards like falling and suffocating).</li>
+<li><strong>Social Interaction:</strong> Guidelines for roleplaying and using ability checks (e.g., Deception, Persuasion, Intimidation) to influence nonplayer characters (NPCs).</li>
+<li><strong>Combat:</strong> A structured, turn-based system. Participants act in <strong>initiative</strong> order, taking actions like attacking (melee or ranged), casting spells, dashing, dodging, or hiding. Damage is resolved through dice rolls, considering <strong>damage types</strong> (e.g., fire, bludgeoning), <strong>resistance, vulnerability</strong>, and <strong>temporary hit points</strong>. Special rules cover dropping to 0 hit points, <strong>death saving throws</strong>, stabilizing allies, and knocking creatures unconscious. Mounted and underwater combat rules are also detailed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Magic System:</strong> Spells are defined as discrete magical effects, categorized by <strong>spell level (0-9)</strong> and schools of magic (e.g., Abjuration, Evocation). Spellcasters utilize <strong>spell slots</strong> to cast spells, requiring specific <strong>components</strong> (verbal, somatic, material) and a <strong>spellcasting focus</strong>. Spells have defined ranges and durations (some requiring <strong>concentration</strong>).</p>
+</li>
+<li>
+<p><strong>Dungeon Master's Tools:</strong> A significant portion assists the DM in game preparation and execution:</p>
+<ul>
+<li><strong>Monsters:</strong> Comprehensive <strong>stat blocks</strong> for a vast array of creatures (e.g., elementals, dragons, humanoids, beasts), detailing their abilities, defenses, and actions.</li>
+<li><strong>Encounter Building:</strong> Guidelines for designing combat encounters of varying <strong>difficulty (Easy, Medium, Hard, Deadly)</strong>, using XP thresholds for characters and multipliers for multiple monsters to accurately gauge challenge.</li>
+<li><strong>Magic Items:</strong> Descriptions of various magical artifacts and how they function, including the concept of <strong>attunement</strong> to unlock their properties.</li>
+</ul>
+</li>
+<li>
+<p><strong>Supplementary Information:</strong> Appendices provide details on common <strong>conditions</strong> (e.g., blinded, charmed, grappled), examples of <strong>deities</strong> from various D&amp;D pantheons, and prominent <strong>factions</strong> within the Forgotten Realms setting. A <strong>character sheet</strong> template is included for player convenience.</p>
+</li>
+</ol>
+<p>The document emphasizes the flexibility of D&amp;D, encouraging DMs to adapt rules and improvise for exciting, unexpected adventures, with the ultimate goal of creating memorable stories.</p>
+
