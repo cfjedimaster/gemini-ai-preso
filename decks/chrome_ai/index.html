@@ -62,7 +62,6 @@
 				<ul>
 				<li class="fragment">What Generative AI is (<span style="color: yellow;font-weight:bold">high level!!</span>)</li>
 				<li class="fragment">JavaScript (good parts, bad parts, meh parts)</li>
-				<li class="fragment">Noob on Stage (me, not you)</li>
 				</li>
 				<aside class="notes">
 				Best way I can describe my current skill level - I have a real good idea now of what I don't know.
@@ -76,7 +75,7 @@
 				<li class="fragment">Chrome is bringing Gen AI to the Web</li>
 				<li class="fragment">Everyone is 100% ok with that!</li>
 				<li class="fragment">Uses the Nano model (small... relatively speaking)</li>
-				<li class="fragment">Currently in Early Preview</li>
+				<li class="fragment">Currently in Preview (Kinda)</li>
 				<li class="fragment">Task Focused (not general purpose)</li>
 				<li class="fragment">Outside of getting the model, 100% on device</li>
 				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Gemini Nano for Chrome</a></li>
@@ -96,7 +95,7 @@
 				</section>
 
 				<section>
-				<h2>Enabling</h2>
+				<h2>Enabling (When Needed)</h2>
 				<ul>
 				<li class="fragment">Join the Program: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZXeiwj9KO9jMctffHPym88ln12xNWCrVkMY_u06WfSTulQg/viewform" target="_blank">Form</a></li>
 				<li class="fragment">Flags and bits</li>
@@ -111,8 +110,11 @@
 				<ul>
 				<li class="fragment">Translator</li>
 				<li class="fragment">Language Detector</li>
-				<li class="fragment">Summarizer (Also Writer/Rewriter)</li>
+				<li class="fragment">Summarizer</li>
+				<li class="fragment">Writer/Rewriter</li>
+				<li class="fragment">Proofreader</li>
 				<li class="fragment">Prompt (General)</li>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in-apis" target="_blank">API List + Status</a></a></li>
 				</ul>
 				<aside class="notes">
 				T/L/S are in "Original Trial", Prompt in EPP
@@ -126,31 +128,20 @@
 				<li class="fragment">Streaming</li>
 				<li class="fragment">Sessions</li>
 				<li class="fragment">System Instructions, Temperature, etc</li>
-				<li class="fragment"><s>Multimodal (images, files etc)</s></li>
+				<li class="fragment">Multimodal (images, audio, <s>files</s>)</li>
 				</ul>
 				</section>
 
 				<section>
-				<h2>Translation</h2>
+				<h2>Translator API</h2>
 				<ul>
 				<li class="fragment">Translates text (duh)</li>
 				<li class="fragment">Can tell you if it can go from X to Y</li>
-				<li class="fragment">Based on language packs, <strong><u>THREE MAX CURRENTLY</u></strong></li>
-				<li class="fragment">Both X and Y must be a "preferred language" in Chrome</li>
-				<li class="fragment">Or: One is preferred and the other is one of: English (en), Mandarin Chinese (zh or zh_Hant), Portuguese (pt), Russian (ru), Spanish (es), Turkish (tr), Hindi (hi), Vietnamese (vi), Bengali (bn)</li>
-				<li class="fragment">Oh, and you can bypass all of this (<a href="https://developer.chrome.com/docs/ai/translator-api#bypass_language_restrictions_for_local_testing" target="_new">hack</a>)</li>
+				<li class="fragment">Based on language packs</li>
+				<li class="fragment">Available since Chrome 138</li>
+				<li class="fragment">Requires User "Gesture"</li>
 
 				</ul>
-				</section>
-
-				<section>
-				<h2>Translator API Trial</h2>
-				<p>
-					<a href="https://developer.chrome.com/origintrials/#/view_trial/4445615782168100865" target="_blank">Trial Signup</a>
-				</p>
-				<p>
-					<a href="chrome://flags/#translation-api" target="_blank">Enable flag #translation-api</a>
-				</p>
 				</section>
 
 				<section>
@@ -197,7 +188,6 @@ const translator = await window.Translator.create({
 	monitor(m) {
 		m.addEventListener('downloadprogress', (e) => {
 			console.log(`Downloaded ${e.loaded} of ${e.total} percent.`);
-			// in theory, flip the button disabled and add event listener
 		});
 	},
 });
@@ -236,22 +226,14 @@ let newString = await translator.translate('What time does the four oclock bus c
 				</section>
 				
 				<section>
-				<h2>Language Detector</h2>
+				<h2>Language Detector API</h2>
 				<ul>
 				<li class="fragment">Detects language of input (duh)</li>
 				<li class="fragment">Can tell you if a language can be detected</li>
 				<li class="fragment">Returns a ranked list of languages with confidence (0 to 1)</li>
+				<li class="fragment">Available since Chrome 138</li>
+				<li class="fragment">Requires User "Gesture"</li>
 				</ul>
-				</section>
-
-				<section>
-				<h2>Language Detector API Trial</h2>
-				<p>
-					<a href="https://developer.chrome.com/origintrials/#/view_trial/662592095176884225" target="_blank">Trial Signup</a>
-				</p>
-				<p>
-					<a href="chrome://flags/#language-detection-api" target="_blank">Enable flag #language-detection-api</a>
-				</p>
 				</section>
 
 				<section>
@@ -339,6 +321,7 @@ if('LanguageDetector' in window) {
 				</ul>
 				</section>		
 
+				<!--
 				<section>
 				<h2>Web Component Demo</h2>
 				<ul>
@@ -384,25 +367,20 @@ de demander au gouvernement une réparation des griefs.
 				<a href="https://glitch.com/edit/#!/mature-glorious-celestite" target="_blank">Glitch Demo</a>
 				</p>
 				</section>
+			-->
 
 				<section>
-				<h2>Summarization</h2>
+				<h2>Summary API</h2>
 				<ul>
 				<li class="fragment">Summarizes text (duh)</li>
 				<li class="fragment">Multiple styles and length of summarization</li>
+				<!--
 				<li class="fragment">Writer API - data to text, expanding lists to text, creating bios</li>
 				<li class="fragment">Rewriter API - improve text, change formality, length</li>
+				-->
+				<li class="fragment">Available since Chrome 138</li>
+				<li class="fragment">Requires User "Gesture"</li>
 				</ul>
-				</section>
-
-				<section>
-				<h2>Summary API Trial</h2>
-				<p>
-					<a href="https://developer.chrome.com/origintrials/#/view_trial/1923599990840623105" target="_blank">Trial Signup</a>
-				</p>
-				<p>
-					<a href="chrome://flags/#summarization-api-for-gemini-nano" target="_blank">Enable flag #summarization-api-for-gemini-nano</a>
-				</p>
 				</section>
 
 				<section>
@@ -419,7 +397,7 @@ de demander au gouvernement une réparation des griefs.
 				<section>
 				<h2>Using the Summarizer API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers>
-if('Summarizer' in window.ai) {
+if('Summarizer' in window) {
 	// You can haz summary
 }
 				</code></pre>
@@ -429,66 +407,55 @@ if('Summarizer' in window.ai) {
 				<section>
 				<h2>Using the Summary API</h2>
 				<pre><code class="javascript" data-trim data-line-numbers="">
-// most of this from Chrome doc as it was excellent				
-if('Summarizer' in window.ai) {
+// most of this from Chrome doc as it was excellent
+if('Summarizer' in window) {
 	// You can haz summary
 
-	let available = (await window.Summarizer.availability());
+	let available = await window.Summarizer.availability();
 
 	let summarizer;
-	if (available === 'no') {
+	if (available === 'unavailable') {
 		// The Summarizer API isn't usable.
 		return;
 	}
 
-	if (available === 'available') {
-		summarizer = await window.ai.summarizer.create();
-	} else {
-		summarizer = await window.Summarizer.create({
-			monitor(m) {
-				m.addEventListener("downloadprogress", e => {
-					console.log(`Downloaded ${e.loaded * 100}%`);
-				});
-			}
-		});
-		await summarizer.ready;
-	}
-
+	let	summarizer = await window.Summarizer.create({
+		monitor(m) {
+			m.addEventListener("downloadprogress", e => {
+				console.log(`Downloaded ${e.loaded * 100}%`);
+			});
+		}
+	});
+		
 }
 				</code></pre>
 				</section>
 
 				<section>
 				<h2>Using the Summary API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="26">
-// most of this from Chrome doc as it was excellent				
-if('Summarizer' in window.ai) {
+				<pre><code class="javascript" data-trim data-line-numbers="20">
+if('Summarizer' in window) {
 	// You can haz summary
 
 	let available = (await window.Summarizer.availability());
 
 	let summarizer;
-	if (available === 'no') {
+	if (available === 'unavailable') {
 		// The Summarizer API isn't usable.
 		return;
 	}
 
-	if (available === 'available') {
-		summarizer = await window.ai.summarizer.create();
-	} else {
-		summarizer = await window.Summarizer.create({
-			monitor(m) {
-				m.addEventListener("downloadprogress", e => {
-					console.log(`Downloaded ${e.loaded * 100}%`);
-				});
-			}
-		});
-		await summarizer.ready;
-	}
-
+	let	summarizer = await window.Summarizer.create({
+		monitor(m) {
+			m.addEventListener("downloadprogress", e => {
+				console.log(`Downloaded ${e.loaded * 100}%`);
+			});
+		}
+	});
+		
 	result = await summarizer.summarize(input);
-
 }
+
 				</code></pre>
 				</section>
 
