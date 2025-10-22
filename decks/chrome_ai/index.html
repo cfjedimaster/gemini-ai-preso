@@ -39,7 +39,6 @@
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>@raymondcamden.com (Bluesky)</li>
 					<li>@raymondcamden (Mastodon)</li>
-					<li>Also, hire me!</li>
 					</ul>
 				</div>
 				<div>
@@ -127,7 +126,7 @@
 				<li class="fragment">Browser + Extensions</li>
 				<li class="fragment">Streaming</li>
 				<li class="fragment">Sessions</li>
-				<li class="fragment">System Instructions, Temperature, etc</li>
+				<li class="fragment">System Instructions, Structured Output, Temperature, etc</li>
 				<li class="fragment">Multimodal (images, audio, <s>files</s>)</li>
 				</ul>
 				</section>
@@ -386,7 +385,7 @@ de demander au gouvernement une réparation des griefs.
 				<section>
 				<h2>Summary Options</h2>
 				<ul>
-				<li class="fragment">Types: key points (default), tl;dr, teaser, headline</li>
+				<li class="fragment">Types: key points (default), tldr, teaser, headline</li>
 				<li class="fragment">Length: short, medium (default), long</li>
 				<li class="fragment">Format: markdown (default) or plain-text</li>
 				<li class="fragment">"sharedContext": additional info to help with summarization</li>
@@ -481,12 +480,48 @@ if('Summarizer' in window) {
 				</section>
 
 				<section>
-				<h2>Streaming</h2>
+				<h2>Writer/Rewiter API</h2>
 				<ul>
-				<li class="fragment">Only available for Summarizer (and Prompt)</li>
-				<li class="fragment">Doesn't quite work right (their words, not mine)</li>
-				<li class="fragment"><a href="https://codepen.io/cfjedimaster/pen/zxYJGvd?editors=1011" target="_blank">Demo</a></li>
+				<li class="fragment">Generates or transforms text</li>
+				<li class="fragment">Can specify a tone, length, format, and sharedContext</li>
+				<li class="fragment">Can specify languages (input, output)</li>
+				<li class="fragment">For length, in writer it is: short, medium, long. For rewriter, it is: shorter, as-is, longer</li>
+				<li class="fragment">For writer and tone: formal, neutral, casual. For rewriter and tone: more-formal, as-is, more-casual</li>
+				<li class="fragment">Origin Trial (flag needed)</li>
 				</ul>
+				</section>
+
+				<section>
+					<h2>Using the Writer/Rewiter APIs</h2>
+					<p>
+						Exact same - let's go right into demos!<br>
+					</p>
+					<p>
+						<a href="https://codepen.io/cfjedimaster/pen/azdYLmy?editors=1010" target="_blank">Writer Demo</a><br>
+						<a href="https://codepen.io/cfjedimaster/pen/KwVoXZz?editors=1010" target="_blank">Rewriter Demo</a>
+					</p>
+				</section>
+
+				<section>
+				<h2>Proofreader API</h2>
+				<ul>
+				<li class="fragment">Identifies grammar, spelling, and punctuation errors</li>
+				<li class="fragment">Is this better than what's in the browser/OS? 🤷‍♀️</li>
+				<li class="fragment">Can do correction, add labels, and explain issues<sup>*</sup></super></li>
+				<li class="fragment">Can specify input language</li>
+				<li class="fragment">Can NOT modify correction types/explanations</li>
+				<li class="fragment">Origin Trial (flag needed)</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>Using the Writer/Rewiter APIs</h2>
+					<p>
+						Exact same - let's go right into demos!<br>
+					</p>
+					<p>
+						<a href="https://codepen.io/cfjedimaster/pen/gbPevjN?editors=1010" target="_blank">Demo</a><br>
+					</p>
 				</section>
 
 				<section>
@@ -494,8 +529,8 @@ if('Summarizer' in window) {
 				<ul>
 				<li class="fragment">General purpose prompting API</li>
 				<li class="fragment">Incredibly flexible (system instructions, structured output, session persistence/cloning)</li>
-				<li class="fragment">In EPP</li>
-				<li class="fragment">For now, skipping code in slides, just demos</li>
+				<li class="fragment">Can work with images and audio</li>
+				<li class="fragment">Origin Trial (released for extensions)</li>
 				</ul>
 				</section>
 
@@ -515,6 +550,19 @@ if('Summarizer' in window) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://public.codepenassets.com/embed/index.js"></script>
+				</section>
+
+				<!--
+				structured results
+				images
+				-->
+				
+				<section>
+				<h2>Streaming</h2>
+				<ul>
+				<li class="fragment">Only available for Summarizer, Rewriter, Writer, and Prompt</li>
+				<li class="fragment"><a href="https://codepen.io/cfjedimaster/pen/zxYJGvd?editors=1011" target="_blank">Demo</a></li>
+				</ul>
 				</section>
 
 				<section>
