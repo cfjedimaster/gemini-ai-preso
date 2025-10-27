@@ -529,6 +529,7 @@ if('Summarizer' in window) {
 				<ul>
 				<li class="fragment">General purpose prompting API</li>
 				<li class="fragment">Incredibly flexible (system instructions, structured output, session persistence/cloning)</li>
+				<li class="fragment">Session-based API</li>
 				<li class="fragment">Can work with images and audio</li>
 				<li class="fragment">Origin Trial (released for extensions)</li>
 				</ul>
@@ -552,11 +553,38 @@ if('Summarizer' in window) {
 <script async src="https://public.codepenassets.com/embed/index.js"></script>
 				</section>
 
-				<!--
-				structured results
-				images
-				-->
+				<section>
+				<h2>The Prompt API - Images</h2>
+				<ul>
+				<li class="fragment">Create a session with expectedInputs</li>
+				<li class="fragment">Values can be text, image, or audio</li>
+				<li class="fragment">There's an expectedOutputs as well, but only text is supported</li>
+				<li class="fragment">Source can be image bitmap objects, file objects, and ???</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="javascript" data-trim data-line-numbers="8">
+const session = await LanguageModel.create({
+  expectedInputs: [ { type: "image" } ]
+});
+				</code></pre>					
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="bNEMbrX" data-pen-title="MM + AI (v2)" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+      <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/bNEMbrX">
+  MM + AI (v2)</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+      <script async src="https://public.codepenassets.com/embed/index.js"></script>					
+				</section>
 				
+				<section>
+					<a href="https://www.raymondcamden.com/2025/08/07/integrating-location-data-with-built-in-chrome-ai-for-better-image-insights" target="_blank">Blog Post on Geo + Images</a>
+				</section>
+
+
 				<section>
 				<h2>Streaming</h2>
 				<ul>
