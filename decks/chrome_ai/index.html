@@ -18,6 +18,12 @@
 			display: grid;
 			grid-template-columns: 80% 20%;
 		}
+
+		.twocol5050 {
+			display: grid;
+			grid-template-columns: 50% 50%;
+		}
+
 		</style>
 
 	</head>
@@ -34,7 +40,7 @@
 					<h2>Me</h2>
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
-					<li>Developer Evangelist for Hire!</li>
+					<li>Developer Evangelist for Webflow</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>@raymondcamden.com (Bluesky)</li>
@@ -75,9 +81,9 @@
 				<li class="fragment">Everyone is 100% ok with that!</li>
 				<li class="fragment">Uses the Nano model (small... relatively speaking)</li>
 				<li class="fragment">Currently in Preview (Kinda)</li>
-				<li class="fragment">Task Focused (not general purpose)</li>
+				<li class="fragment">Task Focused and general purpose</li>
 				<li class="fragment">Outside of getting the model, 100% on device</li>
-				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Gemini Nano for Chrome</a></li>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Built-in AI for Chrome</a></li>
 				</ul>
 				</section>
 
@@ -96,8 +102,9 @@
 				<section>
 				<h2>Enabling (When Needed)</h2>
 				<ul>
-				<li class="fragment">Join the Program: <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZXeiwj9KO9jMctffHPym88ln12xNWCrVkMY_u06WfSTulQg/viewform" target="_blank">Form</a></li>
+				<li class="fragment">Join the Program: <a href="https://developer.chrome.com/docs/ai/join-epp" target="_blank">Form</a></li>
 				<li class="fragment">Flags and bits</li>
+				<li class="fragment">MAY NOT BE REQUIRED!</li>
 				</ul>
 				<p>
 				<img class="fragment" src="img/magic.gif">
@@ -219,6 +226,7 @@ let newString = await translator.translate('What time does the four oclock bus c
 				<section>
 				<h2>Translator - More</h2>
 				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/translator-api" target="_blank">Main Docs</a></li>
 				<li class="fragment"><a href="https://github.com/webmachinelearning/translation-api" target="_blank">GitHub Explainer</a></li>
 				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/translation-language-detection-api-playground/" target="_new">Online Demo</a></li>
 				</ul>
@@ -315,6 +323,7 @@ if('LanguageDetector' in window) {
 				<section>
 				<h2>Detector - More</h2>
 				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/language-detection" target="_blank">Main Docs</a></li>
 				<li class="fragment"><a href="https://github.com/WICG/translation-api" target="_blank">GitHub Explainer</a></li>
 				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/translation-language-detection-api-playground/" target="_new">Online Demo</a></li>
 				</ul>
@@ -474,6 +483,7 @@ if('Summarizer' in window) {
 				<section>
 				<h2>Summary - More</h2>
 				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/summarizer-api" target="_blank">Main Docs</a></li>
 				<li class="fragment"><a href="https://github.com/webmachinelearning/writing-assistance-apis" target="_blank">GitHub Explainer</a></li>
 				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/summarization-api-playground/" target="_new">Online Demo</a></li>
 				</ul>
@@ -559,7 +569,7 @@ if('Summarizer' in window) {
 				<li class="fragment">Create a session with expectedInputs</li>
 				<li class="fragment">Values can be text, image, or audio</li>
 				<li class="fragment">There's an expectedOutputs as well, but only text is supported</li>
-				<li class="fragment">Source can be image bitmap objects, file objects, and ???</li>
+				<li class="fragment">Source can be image bitmap objects, file objects, HTML image/video elements, and more</li>
 				</ul>
 				</section>
 
@@ -593,6 +603,19 @@ const session = await LanguageModel.create({
 				</ul>
 				</section>
 
+				<section>
+					<div class="twocol5050">
+						<div>
+							<a href="https://codepen.io/cfjedimaster/full/raOjKBP" target="_blank">
+								<img src="img/whysoserious.jpg" style="max-width: 100%">
+							</a>
+						</div>
+						<div>
+							<a href="https://dcc.raymondcamden.com/" target="_blank">
+							<img src="img/cat-jumping.gif" style="max-width: 100%">
+							</a>
+						</div>
+				</section>
 				<section>
 				<h2>Wrap Up</h2>
 				<ul>
