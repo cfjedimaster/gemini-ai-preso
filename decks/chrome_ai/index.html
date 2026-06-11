@@ -40,7 +40,7 @@
 					<h2>Me</h2>
 					<ul style="width: 100% !important">
 					<li>Raymond Camden</li>
-					<li>Developer Evangelist for Webflow</li>
+					<li>Developer Evangelist (hire me!)</li>
 					<li>🕸️ raymondcamden.com</li>
 					<li>✉️ raymondcamden@gmail.com</li>
 					<li>@raymondcamden.com (Bluesky)</li>
@@ -80,7 +80,6 @@
 				<li class="fragment">Chrome is bringing Gen AI to the Web</li>
 				<li class="fragment">Everyone is 100% ok with that!</li>
 				<li class="fragment">Uses the Nano model (small... relatively speaking)</li>
-				<li class="fragment">Currently in Preview (Kinda)</li>
 				<li class="fragment">Task Focused and general purpose</li>
 				<li class="fragment">Outside of getting the model, 100% on device</li>
 				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Built-in AI for Chrome</a></li>
@@ -139,14 +138,23 @@
 				</section>
 
 				<section>
+				<h2>API Usage</h2>
+				<ul>
+				<li class="fragment">Check for API availability</li>
+				<li class="fragment">Check for Capabilities</li>
+				<li class="fragment">Check if model needs to be downloaded</li>
+				<li class="fragment">Create an instance (if needed, and MAY REQUIRE USER GESTURE)</li>
+				<li class="fragment">Use it!</li>
+				</ul>
+				</section>
+
+				<section>
 				<h2>Translator API</h2>
 				<ul>
 				<li class="fragment">Translates text (duh)</li>
 				<li class="fragment">Can tell you if it can go from X to Y</li>
 				<li class="fragment">Based on language packs</li>
-				<li class="fragment">Available since Chrome 138</li>
-				<li class="fragment">Requires User "Gesture"</li>
-
+				<li class="fragment">Available since Chrome 138 (Desktop)</li>
 				</ul>
 				</section>
 
@@ -182,6 +190,7 @@ if('Translator' in window) {
 				<li class="fragment">unavailable</li>
 				<li class="fragment">available</li>
 				<li class="fragment">downloadable / downloading</li>
+				<li class="fragment">the above requires a user gesture!!</li>
 				</ul>
 				</section>
 
@@ -204,10 +213,15 @@ const translator = await window.Translator.create({
 
 				<section>
 				<h2>Using the Translator API</h2>
-				<pre><code class="javascript" data-trim data-line-numbers="10-12">
+				<pre><code class="javascript" data-trim data-line-numbers="11">
 const translator = await window.Translator.create({
 	sourceLanguage: 'en',
-	targetLanguage: 'zh'
+	targetLanguage: 'zh',
+	monitor(m) {
+		m.addEventListener('downloadprogress', (e) => {
+			console.log(`Downloaded ${e.loaded} of ${e.total} percent.`);
+		});
+	},
 });
 
 let newString = await translator.translate('What time does the four oclock bus come?');
@@ -238,8 +252,7 @@ let newString = await translator.translate('What time does the four oclock bus c
 				<li class="fragment">Detects language of input (duh)</li>
 				<li class="fragment">Can tell you if a language can be detected</li>
 				<li class="fragment">Returns a ranked list of languages with confidence (0 to 1)</li>
-				<li class="fragment">Available since Chrome 138</li>
-				<li class="fragment">Requires User "Gesture"</li>
+				<li class="fragment">Available since Chrome 138 (Desktop)</li>
 				</ul>
 				</section>
 
@@ -286,7 +299,7 @@ if('LanguageDetector' in window) {
 	// but can you detect anything? 
 	let canDetect = await window.LanguageDetector.availability();
 	console.log('Detect stuff? ', canDetect);
-	if(canDetect === 'available') {
+	if(canDetect !== 'unavailable') {
 		detector = await window.LanguageDetector.create();
 	}
 }
@@ -302,7 +315,7 @@ if('LanguageDetector' in window) {
 	// but can you detect anything? 
 	let canDetect = await window.LanguageDetector.availability();
 	console.log('Detect stuff? ', canDetect);
-	if(canDetect === 'available') {
+	if(canDetect !== 'unavailable') {
 		detector = await window.LanguageDetector.create();
 		let detectedLanguage = await detector.detect(input);
 	}
@@ -382,12 +395,7 @@ de demander au gouvernement une réparation des griefs.
 				<ul>
 				<li class="fragment">Summarizes text (duh)</li>
 				<li class="fragment">Multiple styles and length of summarization</li>
-				<!--
-				<li class="fragment">Writer API - data to text, expanding lists to text, creating bios</li>
-				<li class="fragment">Rewriter API - improve text, change formality, length</li>
-				-->
 				<li class="fragment">Available since Chrome 138</li>
-				<li class="fragment">Requires User "Gesture"</li>
 				</ul>
 				</section>
 
@@ -481,6 +489,15 @@ if('Summarizer' in window) {
 				</section>
 
 				<section>
+				<h2>Summary - Performance</h2>
+				<ul>
+				<li class="fragment">New preference allows for speed versus quality trade-offs</li>
+				<li class="fragment">Behind a flag</li>
+				<li class="fragment"><a href="https://googlechrome.github.io/samples/summarizer-preference-benchmark/" target="_blank">Benchmark demo</a></li>
+				</ul>
+				</section>
+
+				<section>
 				<h2>Summary - More</h2>
 				<ul>
 				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/summarizer-api" target="_blank">Main Docs</a></li>
@@ -525,7 +542,7 @@ if('Summarizer' in window) {
 				</section>
 
 				<section>
-					<h2>Using the Writer/Rewiter APIs</h2>
+					<h2>Using the Proofreader API</h2>
 					<p>
 						Exact same - let's go right into demos!<br>
 					</p>
@@ -541,7 +558,7 @@ if('Summarizer' in window) {
 				<li class="fragment">Incredibly flexible (system instructions, structured output, session persistence/cloning)</li>
 				<li class="fragment">Session-based API</li>
 				<li class="fragment">Can work with images and audio</li>
-				<li class="fragment">Origin Trial (released for extensions)</li>
+				<li class="fragment">Available since Chrome 148</li>
 				</ul>
 				</section>
 
