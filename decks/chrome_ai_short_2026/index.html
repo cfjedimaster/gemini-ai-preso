@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>AI in the Browser with Gemini Nano</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+		.twocol {
+			display: grid;
+			grid-template-columns: 80% 20%;
+		}
+
+		.twocol5050 {
+			display: grid;
+			grid-template-columns: 50% 50%;
+		}
+
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="img/matrix.jpg" data-background-opacity="0.3">
+				<h1>Generative AI in the Browser with Chrome AI</h1>
+				</section>
+
+				<section>
+				<div class="twocol">
+				<div>
+					<h2>Me</h2>
+					<ul style="width: 100% !important">
+					<li>Raymond Camden</li>
+					<li>AI Adoption Engineer @ Cursor</li>
+					<li>🕸️ raymondcamden.com</li>
+					<li>✉️ raymondcamden@gmail.com</li>
+					<li>@raymondcamden.com (Bluesky)</li>
+					<li>@raymondcamden (Mastodon)</li>
+					</ul>
+				</div>
+				<div>
+					<img src="img/ray_tiger.jpg" style="max-width:70%">
+				</div>
+				</div>
+				<aside class="notes">
+i've dreamed of creating deliverables for key stakeholders 
+				</aside>
+				</section>
+
+				<section>
+					<img src="img/qr.png">
+					<a href="https://github.com/cfjedimaster/gemini-ai-preso" target="_new">github.com/cfjedimaster/gemini-ai-preso</a>
+				</section>
+
+				<section>
+				<h2>TLDR</h2>
+				<ul>
+				<li class="fragment">Chrome is bringing Gen AI to the Web</li>
+				<li class="fragment">Everyone is 100% ok with that!</li>
+				<li class="fragment">Uses the Nano model (small... relatively speaking)</li>
+				<li class="fragment">Task Focused and general purpose</li>
+				<li class="fragment">Outside of getting the model, 100% on device</li>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Built-in AI for Chrome</a></li>
+				</ul>
+				</section>
+
+				<section>
+				<img src="img/dragons.jpg">
+				</section>
+
+				<section>
+				<img src="img/email1.png">
+				</section>
+
+				<section>
+				<img src="img/email2.png">
+				</section>
+
+				<section>
+				<h2>Features</h2>
+				<ul>
+				<li class="fragment">Browser + Extensions</li>
+				<li class="fragment">Streaming</li>
+				<li class="fragment">Sessions</li>
+				<li class="fragment">System Instructions, Structured Output, Temperature, etc</li>
+				<li class="fragment">Multimodal <strong><u>input</u></strong> (images, audio, <s>files</s>)</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>APIs</h2>
+				<ul>
+				<li class="fragment">Translator</li>
+				<li class="fragment">Language Detector</li>
+				<li class="fragment">Summarizer</li>
+				<li class="fragment">Writer/Rewriter</li>
+				<li class="fragment">Proofreader</li>
+				<li class="fragment">Prompt (General)</li>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in-apis" target="_blank">API List + Status</a></a></li>
+				</ul>
+				<aside class="notes">
+				T/L/S are in "Original Trial", Prompt in EPP
+				</aside>
+				</section>
+
+				<section>
+				<h2>API Usage</h2>
+				<ul>
+				<li class="fragment">Check for API availability</li>
+				<li class="fragment">Check for Capabilities</li>
+				<li class="fragment">Check if model needs to be downloaded</li>
+				<li class="fragment">Create an instance (if needed, and MAY REQUIRE USER GESTURE)</li>
+				<li class="fragment">Use it!</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Translator API</h2>
+				<ul>
+				<li class="fragment">Translates text (duh)</li>
+				<li class="fragment">Can tell you if it can go from X to Y</li>
+				<li class="fragment">Based on language packs</li>
+				<li class="fragment">Available since Chrome 138 (Desktop)</li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+				<h2>Using the Translator API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers>
+if('Translator' in window) {
+	// You can haz translation
+}
+				</code></pre>
+				</section>
+--->
+<!---
+				<section>
+				<h2>Using the Translator API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="3-9">
+if('Translator' in window) {
+	// You can haz translation
+	// but can you go from X to Y?
+	let translatorCapabilities = await window.Translator.availability({
+		sourceLanguage: 'en',
+		targetLanguage: 'zh'
+	});
+
+	console.log('English to Mandarin? ', translatorCapabilities);
+}
+				</code></pre>
+				</section>
+
+				<section>
+				<h2>About the Capabilities Checks </h2>
+				<ul>
+				<li class="fragment">unavailable</li>
+				<li class="fragment">available</li>
+				<li class="fragment">downloadable / downloading</li>
+				<li class="fragment">the above requires a user gesture!!</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Using the Translator API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="">
+const translator = await window.Translator.create({
+	sourceLanguage: 'en',
+	targetLanguage: 'zh',
+	monitor(m) {
+		m.addEventListener('downloadprogress', (e) => {
+			console.log(`Downloaded ${e.loaded} of ${e.total} percent.`);
+		});
+	},
+});
+
+				</code></pre>
+				</section>
+
+
+				<section>
+				<h2>Using the Translator API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="11">
+const translator = await window.Translator.create({
+	sourceLanguage: 'en',
+	targetLanguage: 'zh',
+	monitor(m) {
+		m.addEventListener('downloadprogress', (e) => {
+			console.log(`Downloaded ${e.loaded} of ${e.total} percent.`);
+		});
+	},
+});
+
+let newString = await translator.translate('What time does the four oclock bus come?');
+				</code></pre>
+				</section>
+
+				<section>
+<p class="codepen" data-height="400" data-theme-id="42685" data-default-tab="result" data-slug-hash="azbKxyw" data-pen-title="Translator March 2025" data-user="cfjedimaster" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/azbKxyw">
+  Translator March 2025</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>				
+				</section>
+
+				<section>
+				<h2>Translator - More</h2>
+				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/translator-api" target="_blank">Main Docs</a></li>
+				<li class="fragment"><a href="https://github.com/webmachinelearning/translation-api" target="_blank">GitHub Explainer</a></li>
+				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/translation-language-detection-api-playground/" target="_new">Online Demo</a></li>
+				</ul>
+				</section>
+				--->
+				<section>
+				<h2>Language Detector API</h2>
+				<ul>
+				<li class="fragment">Detects language of input (duh)</li>
+				<li class="fragment">Can tell you if a language can be detected</li>
+				<li class="fragment">Returns a ranked list of languages with confidence (0 to 1)</li>
+				<li class="fragment">Available since Chrome 138 (Desktop)</li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+				<h2>Using the Language Detector API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers>
+if('LanguageDetector' in window) {
+	// You can haz detection
+}
+				</code></pre>
+				</section>
+
+				<section>
+				<h2>Using the Language Detector API - V1</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="3-5">
+if('LanguageDetector' in window) {
+	// You can haz detection
+	// but can you detect anything? 
+	let canDetect = await window.LanguageDetector.availability();
+	console.log('Detect stuff? ', canDetect);
+}
+				</code></pre>
+				</section>
+
+				<section>
+				<h2>Using the Language Detector API - V2</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="3-7">
+if('LanguageDetector' in window) {
+	// You can haz detection
+	// but can you detect anything? 
+	let canDetect = await window.LanguageDetector.availability({ 
+		expectedInputLanguages: ["en", "zh"]
+	})
+	console.log('Detect stuff? ', canDetect);
+}
+				</code></pre>
+				</section>
+
+				<section>
+				<h2>Using the Language Detector API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="6-9">
+if('LanguageDetector' in window) {
+	// You can haz detection
+	// but can you detect anything? 
+	let canDetect = await window.LanguageDetector.availability();
+	console.log('Detect stuff? ', canDetect);
+	if(canDetect !== 'unavailable') {
+		detector = await window.LanguageDetector.create();
+	}
+}
+				</code></pre>
+				</section>
+
+
+				<section>
+				<h2>Using the Language Detector API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="8">
+if('LanguageDetector' in window) {
+	// You can haz detection
+	// but can you detect anything? 
+	let canDetect = await window.LanguageDetector.availability();
+	console.log('Detect stuff? ', canDetect);
+	if(canDetect !== 'unavailable') {
+		detector = await window.LanguageDetector.create();
+		let detectedLanguage = await detector.detect(input);
+	}
+}
+
+				</code></pre>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="mydKZeO" data-pen-title="Translator March 2025" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/mydKZeO">
+  Translator March 2025</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>				
+				</section>
+
+				<section>
+				<h2>Detector - More</h2>
+				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/language-detection" target="_blank">Main Docs</a></li>
+				<li class="fragment"><a href="https://github.com/WICG/translation-api" target="_blank">GitHub Explainer</a></li>
+				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/translation-language-detection-api-playground/" target="_new">Online Demo</a></li>
+				</ul>
+				</section>		
+--->
+
+				<section>
+				<h2>Summary API</h2>
+				<ul>
+				<li class="fragment">Summarizes text (duh)</li>
+				<li class="fragment">Multiple styles and length of summarization</li>
+				<li class="fragment">Available since Chrome 138</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Summary Options</h2>
+				<ul>
+				<li class="fragment">Types: key points (default), tldr, teaser, headline</li>
+				<li class="fragment">Length: short, medium (default), long</li>
+				<li class="fragment">Format: markdown (default) or plain-text</li>
+				<li class="fragment">"sharedContext": additional info to help with summarization</li>
+				<li class="fragment">Results sometimes includes context</li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+				<h2>Using the Summarizer API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers>
+if('Summarizer' in window) {
+	// You can haz summary
+}
+				</code></pre>
+				</section>
+
+
+				<section>
+				<h2>Using the Summary API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="">
+// most of this from Chrome doc as it was excellent
+if('Summarizer' in window) {
+	// You can haz summary
+
+	let available = await window.Summarizer.availability();
+
+	let summarizer;
+	if (available === 'unavailable') {
+		// The Summarizer API isn't usable.
+		return;
+	}
+
+	let	summarizer = await window.Summarizer.create({
+		monitor(m) {
+			m.addEventListener("downloadprogress", e => {
+				console.log(`Downloaded ${e.loaded * 100}%`);
+			});
+		}
+	});
+		
+}
+				</code></pre>
+				</section>
+
+				<section>
+				<h2>Using the Summary API</h2>
+				<pre><code class="javascript" data-trim data-line-numbers="20">
+if('Summarizer' in window) {
+	// You can haz summary
+
+	let available = (await window.Summarizer.availability());
+
+	let summarizer;
+	if (available === 'unavailable') {
+		// The Summarizer API isn't usable.
+		return;
+	}
+
+	let	summarizer = await window.Summarizer.create({
+		monitor(m) {
+			m.addEventListener("downloadprogress", e => {
+				console.log(`Downloaded ${e.loaded * 100}%`);
+			});
+		}
+	});
+		
+	result = await summarizer.summarize(input);
+}
+
+				</code></pre>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="mydjBZV" data-pen-title="Summary March 2025" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/mydjBZV">
+  Summary March 2025</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+				<p class="fragment">
+				<a href="https://codepen.io/cfjedimaster/pen/jEOXymr?editors=1010" target="_blank">Option Demo</a>
+				</p>
+				</section>
+--->
+
+				<section>
+				<h2>Summary - Performance</h2>
+				<ul>
+				<li class="fragment">New preference allows for speed versus quality trade-offs</li>
+				<li class="fragment">Behind a flag</li>
+				<li class="fragment"><a href="https://googlechrome.github.io/samples/summarizer-preference-benchmark/" target="_blank">Benchmark demo</a></li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+				<h2>Summary - More</h2>
+				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/summarizer-api" target="_blank">Main Docs</a></li>
+				<li class="fragment"><a href="https://github.com/webmachinelearning/writing-assistance-apis" target="_blank">GitHub Explainer</a></li>
+				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/summarization-api-playground/" target="_new">Online Demo</a></li>
+				</ul>
+				</section>
+--->
+				<section>
+				<h2>Writer/Rewiter API</h2>
+				<ul>
+				<li class="fragment">Generates or transforms text</li>
+				<li class="fragment">Can specify a tone, length, format, and sharedContext</li>
+				<li class="fragment">Can specify languages (input, output)</li>
+				<li class="fragment">For length, in writer it is: short, medium, long. For rewriter, it is: shorter, as-is, longer</li>
+				<li class="fragment">For writer and tone: formal, neutral, casual. For rewriter and tone: more-formal, as-is, more-casual</li>
+				<li class="fragment">Origin Trial (flag needed)</li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+					<h2>Using the Writer/Rewiter APIs</h2>
+					<p>
+						Exact same - let's go right into demos!<br>
+					</p>
+					<p>
+						<a href="https://codepen.io/cfjedimaster/pen/azdYLmy?editors=1010" target="_blank">Writer Demo</a><br>
+						<a href="https://codepen.io/cfjedimaster/pen/KwVoXZz?editors=1010" target="_blank">Rewriter Demo</a>
+					</p>
+				</section>
+--->
+				<section>
+				<h2>Proofreader API</h2>
+				<ul>
+				<li class="fragment">Identifies grammar, spelling, and punctuation errors</li>
+				<li class="fragment">Is this better than what's in the browser/OS? 🤷‍♀️</li>
+				<li class="fragment">Can do correction, add labels, and explain issues<sup>*</sup></super></li>
+				<li class="fragment">Can specify input language</li>
+				<li class="fragment">Can NOT modify correction types/explanations</li>
+				<li class="fragment">Origin Trial (flag needed)</li>
+				</ul>
+				</section>
+
+				<!---
+				<section>
+					<h2>Using the Proofreader API</h2>
+					<p>
+						Exact same - let's go right into demos!<br>
+					</p>
+					<p>
+						<a href="https://codepen.io/cfjedimaster/pen/gbPevjN?editors=1010" target="_blank">Demo</a><br>
+					</p>
+				</section>
+--->
+				<section>
+				<h2>The Prompt API</h2>
+				<ul>
+				<li class="fragment">General purpose prompting API</li>
+				<li class="fragment">Incredibly flexible (system instructions, structured output, session persistence/cloning)</li>
+				<li class="fragment">Session-based API</li>
+				<li class="fragment">Can work with images and audio</li>
+				<li class="fragment">Available since Chrome 148</li>
+				</ul>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="MYWZopJ" data-pen-title="Writer March 2025" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/MYWZopJ">
+  Writer March 2025</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="gbOZGao" data-pen-title="LanguageModel + Weather" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/gbOZGao">
+  LanguageModel + Weather</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+				</section>
+
+				<section>
+				<h2>The Prompt API - Images</h2>
+				<ul>
+				<li class="fragment">Create a session with expectedInputs</li>
+				<li class="fragment">Values can be text, image, or audio</li>
+				<li class="fragment">There's an expectedOutputs as well, but only text is supported</li>
+				<li class="fragment">Source can be image bitmap objects, file objects, HTML image/video elements, and more</li>
+				</ul>
+				</section>
+
+				<section>
+				<pre><code class="javascript" data-trim data-line-numbers="8">
+const session = await LanguageModel.create({
+  expectedInputs: [ { type: "image" } ]
+});
+				</code></pre>					
+				</section>
+
+				<section>
+<p class="codepen" data-height="500" data-theme-id="42685" data-default-tab="result" data-slug-hash="bNEMbrX" data-pen-title="MM + AI (v2)" data-user="cfjedimaster" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+      <span>See the Pen <a href="https://codepen.io/cfjedimaster/pen/bNEMbrX">
+  MM + AI (v2)</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+      <script async src="https://public.codepenassets.com/embed/index.js"></script>					
+				</section>
+				
+				<section>
+					<a href="https://www.raymondcamden.com/2025/08/07/integrating-location-data-with-built-in-chrome-ai-for-better-image-insights" target="_blank">Blog Post on Geo + Images</a>
+				</section>
+
+
+				<section>
+				<h2>Streaming</h2>
+				<ul>
+				<li class="fragment">Only available for Summarizer, Rewriter, Writer, and Prompt</li>
+				<li class="fragment"><a href="https://codepen.io/cfjedimaster/pen/zxYJGvd?editors=1011" target="_blank">Demo</a></li>
+				</ul>
+				</section>
+
+				<section>
+					<div class="twocol5050">
+						<div>
+							<a href="https://codepen.io/cfjedimaster/full/raOjKBP" target="_blank">
+								<img src="img/whysoserious.jpg" style="max-width: 100%">
+							</a>
+						</div>
+						<div>
+							<a href="https://dcc.raymondcamden.com/" target="_blank">
+							<img src="img/cat-jumping.gif" style="max-width: 100%">
+							</a>
+						</div>
+				</section>
+				<section>
+				<h2>Wrap Up</h2>
+				<ul>
+				<li class="fragment"><a href="https://developer.chrome.com/docs/ai/built-in" target="_blank">Main Docs</a></li>
+				<li class="fragment"><a href="https://chrome.dev/web-ai-demos/" target="_blank">Demos</a></li>
+				<li class="fragment">Newsgroup</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Questions?</h2>
+				<ul>
+				<li>Me: <a href="https://www.raymondcamden.com" target="_blank">raymondcamden.com</a></li>
+				<li>This: <a href="https://github.com/cfjedimaster/gemini-ai-preso" target="_blank">github.com/cfjedimaster/gemini-ai-preso</a></li>
+				</ul>
+				</section>
+
+<!--
+To consider: Typo rewriting: https://www.raymondcamden.com/2025/02/27/using-ai-in-the-browser-for-typo-rewriting
+-->
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: "c/t",
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
